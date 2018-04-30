@@ -51,7 +51,7 @@ const styleRules = {
     "template-tag-spacing": ERROR,
     "array-bracket-newline": [
         WARN,
-        {multiline:true}
+        {multiline: true}
     ],
     "array-bracket-spacing": WARN,
     "array-element-newline": 0, // Not useful right now, because there is no `consistent` option: https://github.com/eslint/eslint/issues/9457
@@ -107,9 +107,11 @@ const esRules = {
     "prefer-spread": WARN,
     "prefer-template": WARN,
     "require-yield": WARN,
-    "prefer-destructuring": [WARN, {
-        "array": false // https://eslint.org/docs/rules/prefer-destructuring#when-not-to-use-it
-    }],
+    "prefer-destructuring": [
+        WARN, {
+            array: false // https://eslint.org/docs/rules/prefer-destructuring#when-not-to-use-it
+        }
+    ],
     "array-callback-return": WARN,
     "callback-return": WARN,
     eqeqeq: [ERROR, "smart"],
@@ -190,8 +192,8 @@ const pluginPromiseRules = {
     "promise/prefer-await-to-callbacks": WARN
 }
 
-const regex = {
-        "optimize-regex/optimize-regex": WARN
+const regexRules = {
+    "optimize-regex/optimize-regex": WARN
 }
 
 module.exports = {
@@ -200,6 +202,7 @@ module.exports = {
         ecmaVersion: 8,
         sourceType: "module"
     },
+    extends: ["plugin:react/recommended"],
     plugins: ["promise", "optimize-regex"],
-    rules: Object.assign({}, esRules, styleRules, pluginPromiseRules)
+    rules: Object.assign({}, esRules, styleRules, pluginPromiseRules, regexRules)
 }

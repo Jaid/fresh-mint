@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="<%= htmlWebpackPlugin.options.appDescription.language %>">
+<head>
+
+    <meta charset="utf-8">
+
+    <title><%= htmlWebpackPlugin.options.appDescription.title %></title>
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="application-name" content="<%= htmlWebpackPlugin.options.appDescription.title %>">
+    <meta name="description" content="<%= htmlWebpackPlugin.options.appDescription.description %>">
+    <meta name="author" content="<%= htmlWebpackPlugin.options.appDescription.authorName %>">
+    <link rel='publisher' href="<%= htmlWebpackPlugin.options.appDescription.authorUrl %>">
+
+    <% if (htmlWebpackPlugin.options.appDescription.appleMeta) { %>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="<%= htmlWebpackPlugin.options.appDescription.appleMeta.statusBarStyle %>">
+    <meta name="format-detection" content="telephone=<%= htmlWebpackPlugin.options.appDescription.appleMeta.parsePhoneNumbers ? "yes" : "no" %>">
+    <% } %>
+
+    <% if (htmlWebpackPlugin.options.appDescription.openGraph) { %>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.title %>" />
+    <meta property="og:url" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.url %>" />
+    <meta property="og:image" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.image %>" />
+    <meta property="og:image:width" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.imageWidth %>" />
+    <meta property="og:image:height" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.imageHeight %>" />
+    <meta property="og:locale" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.locale %>" />
+    <meta property="og:description" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.description %>" />
+    <% } %>
+
+    <% if (htmlWebpackPlugin.options.appDescription.openGraphFacebook) { %>
+    <meta property="og:updated_time" content="<%= htmlWebpackPlugin.options.appDescription.openGraphFacebook.updatedTime %>" />
+    <% } %>
+
+    <% if (htmlWebpackPlugin.options.appDescription.twitterCard) { %>
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:site" content="<%= htmlWebpackPlugin.options.appDescription.twitterCard.businessProfileHandle %>" />
+    <meta property="twitter:creator" content="<%= htmlWebpackPlugin.options.appDescription.twitterCard.authorProfileHandle %>" />
+    <meta property="twitter:title" content="<%= htmlWebpackPlugin.options.appDescription.twitterCard.title %>" />
+    <meta property="twitter:description" content="<%= htmlWebpackPlugin.options.appDescription.twitterCard.description %>" />
+    <meta property="twitter:image" content="<%= htmlWebpackPlugin.options.appDescription.twitterCard.image %>" />
+    <% } %>
+
+    <% if (htmlWebpackPlugin.options.appDescription.googleFonts) { htmlWebpackPlugin.options.appDescription.googleFonts.forEach(function(font) { %>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=<%= font %>">
+    <% }) } %>
+
+    <%- htmlWebpackPlugin.options.faviconHeaders %>
+
+</head>
+
+<body>
+<div id='react'/>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 import React from "react"
 
-export default class App {
+export default class App extends React.Component {
 
     static propTypes = {}
 

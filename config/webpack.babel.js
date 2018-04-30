@@ -1,6 +1,8 @@
 import path from "path"
 import LodashModuleReplacementPlugin from "lodash-webpack-plugin"
+import HtmlWebpackPlugin from "html-webpack-plugin"
 import webpack from "webpack"
+import appDescription from "./app"
 
 const isDevelopment = global.DEBUG === true ? true : process.env.NODE_ENV !== "production"
 
@@ -24,7 +26,7 @@ const config = {
                 use: "babel-loader"
             },
             {
-                test: /\.postcss/,
+                test: /\.postcss/, // eslint-disable-line optimize-regex/optimize-regex
                 exclude: /node_modules\//,
                 use: [
                     "to-string-loader",
@@ -66,7 +68,25 @@ const config = {
             }
         ]
     },
-    plugins: []
+    plugins: [
+        new HtmlWebpackPlugin({
+            appDescription,
+            template: `!!ejs-compiled-loader!${path.resolve(__dirname, "html.ejs")}`,
+            minify: isDevelopment ? false : {
+                removeAttributeQuotes: true,
+                collapseWhitespace: true,
+                collapseBooleanAttributes: true,
+                decodeEntities: true,
+                minifyCSS: true,
+                minifyJS: true,
+                removeComments: true,
+                removeRedundantAttributes: true,
+                sortAttributes: true,
+                sortClassName: true,
+                useShortDoctype: true
+            }
+        })
+    ]
 }
 
 if (!isDevelopment) {
