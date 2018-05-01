@@ -139,7 +139,6 @@ const esRules = {
     "no-implicit-coercion": WARN,
     "no-inner-declarations": WARN,
     "no-invalid-regexp": ERROR,
-    "no-invalid-this": ERROR,
     "no-irregular-whitespace": WARN,
     "no-iterator": ERROR,
     "no-label-var": WARN,

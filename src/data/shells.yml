@@ -1,0 +1,4 @@
+- name: bash
+  rcPath: "~/.bashrc"
+- name: zsh
+  rcPath: "~/.zshrc"

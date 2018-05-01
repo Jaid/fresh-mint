@@ -47,7 +47,9 @@
     },
     "dependencies": {
         "@babel/runtime": "^7.0.0-beta.46",
-        "lodash": "^4.17.4"
+        "lodash": "^4.17.4",
+        "shell-escape-tag": "^1.1.0",
+        "url": "^0.11.0"
     },
     "scripts": {
         "build-prod": "NODE_ENV=production ./node_modules/.bin/webpack --config config/webpack.babel.js --output-path build",
