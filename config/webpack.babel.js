@@ -22,20 +22,26 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.jsx/,
+                test: /\.jsx$/,
                 exclude: /node_modules\//,
                 use: "babel-loader"
             },
             {
                 test: /\.postcss/, // eslint-disable-line optimize-regex/optimize-regex
-                exclude: /node_modules\//,
                 use: [
-                    "to-string-loader",
+                    {
+                        loader: "style-loader",
+                        options: {
+                            hmr: isDevelopment
+                        }
+                    },
                     {
                         loader: "css-loader",
                         options: {
                             sourceMap: isDevelopment,
-                            importLoaders: 1
+                            importLoaders: 1,
+                            modules: true, // CSS Modules https://github.com/css-modules/css-modules,
+                            localIdentName: isDevelopment ? "[name]_[local]_[hash:base64:4]" : undefined
                         }
                     },
                     {
@@ -43,7 +49,7 @@ const config = {
                         options: {
                             sourceMap: "inline",
                             config: {
-                                path: path.resolve(__dirname, "postcss.js"),
+                                path: path.resolve(__dirname, "postcss.config.js"),
                                 ctx: {
                                     debug: isDevelopment
                                 }
@@ -53,19 +59,51 @@ const config = {
                 ]
             },
             {
-                test: /\.yml/,
-                exclude: /node_modules\//,
+                test: /\.scss$/, // eslint-disable-line optimize-regex/optimize-regex
+                use: [
+                    {
+                        loader: "style-loader",
+                        options: {
+                            hmr: isDevelopment
+                        }
+                    },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: isDevelopment,
+                            importLoaders: 2
+                        }
+                    },
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            sourceMap: "inline",
+                            config: {
+                                path: path.resolve(__dirname, "postcss.config.js"),
+                                ctx: {
+                                    debug: isDevelopment
+                                }
+                            }
+                        }
+                    },
+                    "sass-loader"
+                ]
+            },
+            {
+                test: /\.css$/, // eslint-disable-line optimize-regex/optimize-regex
+                use: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.yml$/,
                 use: "yml-loader"
             },
             {
-                test: new RegExp(".(jpg|png|gif|svg|ttf)$"),
-                use: "url-loader?limit=5000",
-                exclude: /node_modules/
+                test: /\.(jpg|png|gif|svg|ttf|woff|woff2|eot)$/, // eslint-disable-line optimize-regex/optimize-regex
+                use: "url-loader?limit=5000"
             },
             {
                 test: /\.html$/,
-                use: "html-loader",
-                exclude: /node_modules/
+                use: "html-loader"
             }
         ]
     },
@@ -96,7 +134,7 @@ if (!isDevelopment) {
 }
 
 if (isDevelopment) {
-    config.devtool = "eval-source-map"
+    config.devtool = "cheap-module-source-map"
 }
 
 module.exports = config

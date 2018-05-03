@@ -41,9 +41,9 @@ export default class {
         }
     }
 
-    toString = () => Object.values(this.groups)
+    toString = () => `${this.header}\n\n${Object.values(this.groups)
         .filter(group => group.code.length)
         .map(group => group.toString())
-        .join("\n\n")
+        .join("\n\n")}`
 
 }

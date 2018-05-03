@@ -1,0 +1,25 @@
+.label {
+    margin-left: 5px;
+    vertical-align: sub;
+    &.install {
+
+    }
+
+    &:not(.install) {
+        color: gray;
+    }
+}
+
+.switch {
+}
+
+.installText {
+    &:before {
+        content: "Install";
+        font-weight: bold;
+        vertical-align: sub;
+        margin-left: 5px;
+        color: white;
+        text-shadow: 0 0 3px #00000099;
+    }
+}

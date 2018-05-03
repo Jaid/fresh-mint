@@ -1,0 +1,92 @@
+- package: build-essential
+  default: true
+
+- package: software-properties-common
+  default: true
+
+- package: git
+  title: Git
+  default: true
+
+- package: oracle-java9-installer
+  title: Java 9
+  ppa: webupd8team/java
+  default: true
+
+- package: python-pip
+  title: Python pip
+  default: true
+
+- package: steam
+  title: Steam
+
+- package: wireshark
+  title: Wireshark
+  default: true
+
+- package: krita
+  title: Krita
+  default: true
+  ppa: kritalime/ppa
+
+- package: discord
+  title: Discord
+  deb: https://discordapp.com/api/download?platform=linux&format=deb
+
+- package: atom
+  default: true
+  title: Atom Text Editor
+  ppa: nilarimogard/webupd8
+
+- nvidia-current
+
+- package: google-chrome-stable
+  title: Google Chrome
+  list: google.list
+  listUrl: http://dl.google.com/linux/chrome/deb/
+
+- package: shutter
+  title: Shutter
+  default: true
+
+- package: virtualbox-qt
+  title: VirtualBox
+
+- package: mint-meta-codecs
+  default: true
+
+- package: ffmpeg
+  title: FFmpeg
+  default: true
+
+- package: "x264"
+  title: x264 Codec
+  default: true
+
+- package: vlc
+  title: VLC Media Player
+  default: true
+
+- package: blender # Updates seem to be very delayed (My Blender version on Steam is 2.79b and my Blender version on apt is 2.76b)
+  title: Blender
+
+- package: audacity
+  title: Audacity
+  default: true
+
+- package: zsh
+  title: zsh
+  default: true
+
+- package: thunderbird
+  title: Mozilla Thunderbird
+  default: true
+
+- package: cpu-g
+  ppa: atareao/atareao
+
+- package: i-nex
+  ppa: i-nex-development-team/stable
+
+- package: spotify-client
+  title: Spotify

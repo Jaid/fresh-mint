@@ -1,5 +1,5 @@
 import url from "url"
-import shellEscape from "shell-escape-tag"
+import shellEscape from "../lib/shell-escape-tag"
 import Template from "./Template"
 
 export default class extends Template {

@@ -1,11 +1,11 @@
 const fs = require("fs")
 const packageData = JSON.parse(fs.readFileSync("package.json", "utf8"))
 
-const title = "Wombathimmel"
+const title = "Fresh Mint"
 const version = packageData.version
 const embedTitle = title
 const authorName = packageData.author.name
-const authorUrl = "https://github.com/jaid"
+const authorUrl = packageData.author.url
 const siteUrl = "https://github.com/jaid/fresh-mint"
 const description = packageData.description
 const thumbnail = `${siteUrl}/coast-228x228.png`

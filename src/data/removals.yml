@@ -1,0 +1,4 @@
+- brasero
+
+- package: gnome-orca
+  default: true

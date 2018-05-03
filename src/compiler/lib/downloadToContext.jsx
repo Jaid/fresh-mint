@@ -1,4 +1,4 @@
-import shellEscape from "shell-escape-tag"
+import shellEscape from "../lib/shell-escape-tag"
 
 exports.long = (url, handlerScript) => shellEscape`wget --quiet --output-document - ${url} | ` + handlerScript
 

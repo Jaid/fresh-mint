@@ -1,4 +1,4 @@
-import shellEscape from "shell-escape-tag"
+import shellEscape from "../lib/shell-escape-tag"
 import url from "url"
 
 import Template from "./Template"
