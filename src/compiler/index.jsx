@@ -86,7 +86,7 @@ export default setup => {
                         script.addCode(new AptAddSourceTemplate(install.list).toString(setup), "addSources")
                     }
 
-                    script.addCode(new AptInstallTemplate(install.id).toString(setup), "aptInstall")
+                    script.addCode(new AptInstallTemplate(install.package).toString(setup), "aptInstall")
                 }
             }
 
