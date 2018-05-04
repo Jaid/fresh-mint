@@ -5,9 +5,7 @@ import AptInstallTemplate from "./templates/AptInstallTemplate"
 import AptAddKeyTemplate from "./templates/AptAddKeyTemplate"
 import AptAddSourceTemplate from "./templates/AptAddSourceTemplate"
 import PpaTemplate from "./templates/PpaTemplate"
-import BashFromWebTemplate from "./templates/BashFromWebTemplate"
-import PythonFromWebTemplate from "./templates/PythonFromWebTemplate"
-import PythonYesFromWebTemplate from "./templates/PythonYesFromWebTemplate"
+import ExecuteFromWebTemplate from "./templates/ExecuteFromWebTemplate"
 import ReloadShellTemplate from "./templates/ReloadShellTemplate"
 import installs from "data/installs"
 import and from "and"
@@ -98,7 +96,7 @@ export default setup => {
             }
 
             if (checkedInstalls.find(install => install.list)) {
-                script.addCode(new PythonYesFromWebTemplate("https://raw.githubusercontent.com/davidfoerster/apt-remove-duplicate-source-entries/master/apt-remove-duplicate-source-entries.py").toString(setup, "Remove duplicate entries from source lists"), "clean")
+                script.addCode(new ExecuteFromWebTemplate("https://raw.githubusercontent.com/davidfoerster/apt-remove-duplicate-source-entries/master/apt-remove-duplicate-source-entries.py", `sudo python3 - ${setup.format === "long" ? "--yes" : "-y"}`).toString(setup, "Remove duplicate entries from source lists"), "clean")
             }
         }
 
