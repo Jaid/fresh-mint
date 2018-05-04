@@ -13,20 +13,21 @@
   ppa: webupd8team/java
   default: true
 
+- package: oracle-java8-installer
+  title: Java 8
+  ppa: webupd8team/java
+
 - package: python-pip
   title: Python pip
-  default: true
 
 - package: steam
   title: Steam
 
 - package: wireshark
   title: Wireshark
-  default: true
 
 - package: krita
   title: Krita
-  default: true
   ppa: kritalime/ppa
 
 - package: discord
@@ -36,7 +37,7 @@
 - package: atom
   default: true
   title: Atom Text Editor
-  ppa: nilarimogard/webupd8
+  ppa: webupd8team/atom
 
 - nvidia-current
 
@@ -72,15 +73,12 @@
 
 - package: audacity
   title: Audacity
-  default: true
 
 - package: zsh
   title: zsh
-  default: true
 
 - package: thunderbird
   title: Mozilla Thunderbird
-  default: true
 
 - package: cpu-g
   ppa: atareao/atareao
@@ -90,3 +88,7 @@
 
 - package: spotify-client
   title: Spotify
+
+- package: obs-studio
+  title: Open Broadcaster Software
+  ppa: obsproject/obs-studio

@@ -16,6 +16,13 @@ export default class {
         return this.compileLong
     }
 
-    compile = setup => this.getCompilerByFormat(setup?.format)(setup)
+    toString = (setup, comment) => {
+        const command = this.compile(setup)
+        if (comment) {
+            return `${command} # ${comment}`
+        } else {
+            return command
+        }
+    }
 
 }

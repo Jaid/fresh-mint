@@ -15,18 +15,16 @@ export default class extends Template {
         })
     }
 
-    compileLong = () => {
+    compile = setup => {
         const sourcesFolder = "/etc/apt/sources.list.d"
         const file = `${sourcesFolder}/${this.input.fileName}`
         const fileContent = `deb [arch=amd64] ${this.input.url} stable main`
-        return shellEscape`sudo sh -c "echo ${fileContent} >> ${file}"`
-    }
 
-    compileShort = () => {
-        const sourcesFolder = "/etc/apt/sources.list.d"
-        const file = `${sourcesFolder}/${this.input.fileName}`
-        const fileContent = `deb [arch=amd64] ${this.input.url} stable main`
-        return shellEscape`sudo sh -c "echo ${fileContent} >> ${file}"`
+        if (setup.format === "long") {
+            return shellEscape`sudo sh -c "echo ${fileContent} >> ${file}"` // http://heirloom.sourceforge.net/sh/sh.1.html Where is the long form of -c?
+        } else {
+            return shellEscape`sudo sh -c "echo ${fileContent} >> ${file}"`
+        }
     }
 
 }

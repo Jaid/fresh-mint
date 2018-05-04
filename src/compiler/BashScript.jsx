@@ -1,3 +1,5 @@
+import lodash from "lodash"
+
 class CodeGroup {
 
     constructor(id, options = {}) {
@@ -12,21 +14,27 @@ class CodeGroup {
     addCode = code => {
         if (typeof code === "string") {
             this.code.push(code)
-        } else {
+        } else if (lodash.isArray(code)) {
             this.code.push(...code)
         }
     }
 
-    toString = () => `# ${this.title}\n${this.code.join("\n")}`
+    toString = () => `# ${this.title}\n${this.code.map(code => typeof code === "string" ? code : String(code)).join("\n")}`
 
 }
 
 export default class {
 
-    constructor() {
+    constructor(groups = null) {
         this.groups = {}
         this.header = "#!/usr/bin/env bash"
         this.addGroup("head")
+
+        if (typeof groups === "object") {
+            for (const [id, options] of Object.entries(groups)) {
+                this.addGroup(id, options)
+            }
+        }
     }
 
     addGroup = (id, options) => {

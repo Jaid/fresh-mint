@@ -11,8 +11,13 @@ export default class extends Template {
         super(input)
     }
 
-    compileLong = () => shellEscape`sudo apt install --yes ${this.input.name}`
+    compile = setup => {
+        if (setup.format === "long") {
+            return shellEscape`sudo apt install --yes ${this.input.name}`
+        } else {
+            return shellEscape`sudo apt install -y ${this.input.name}`
+        }
+    }
 
-    compileShort = () => shellEscape`sudo apt install -y ${this.input.name}`
 
 }

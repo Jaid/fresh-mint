@@ -21,6 +21,8 @@ $font-family-sans-serif: Ubuntu, Roboto, Arial, sans-serif;
 $font-family-monospace: 'Source Code Pro', 'Ubuntu Mono', 'Courier New', monospace;
 $font-family-base: $font-family-sans-serif;
 
+$form-group-margin-bottom: 2px;
+
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/root";

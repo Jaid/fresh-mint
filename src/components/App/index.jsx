@@ -5,7 +5,7 @@ import highlightCss from "highlight.js/styles/atom-one-dark.css" // eslint-disab
 // import bootstrap from "bootstrap"
 import "./theme.scss"
 import css from "./style.postcss"
-import Form from "components/Form"
+import SetupForm from "components/SetupForm"
 import compileBash from "../../compiler"
 
 export default class App extends React.Component {
@@ -16,11 +16,11 @@ export default class App extends React.Component {
     }
 
     onFormChange = ({formData}) => {
-        this.setState({formData}) // Breaking and apparently unfixable in combination with custom widget: https://github.com/mozilla-services/react-jsonschema-form/issues/513
+        this.setState({formData})
     }
 
     render = () => <div className={css.content}>
-        <Form className={css.form} onChange={this.onFormChange} formData={this.state.formData} />
+        <SetupForm className={css.form} onChange={this.onFormChange} formData={this.state.formData} onInit={this.onFormChange} />
         <BareHighlight highlightjs={highlight} languages={["bash"]} className={css.code}>{compileBash(this.state.formData)}</BareHighlight>
     </div>
 

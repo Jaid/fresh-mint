@@ -1,32 +1,18 @@
 import shellEscape from "../lib/shell-escape-tag"
-import url from "url"
+import download from "../lib/download"
 
 import Template from "./Template"
 
 export default class extends Template {
 
-    constructor(input) {
-        if (typeof input === "string") {
-            input = {url: input}
-        }
-
-        input = {
-            fileName: `${url.parse(input.url).hostname}.deb`,
-            directory: "/tmp",
-            ...input
-        }
-
-        super(input)
-    }
-
-    compileLong = () => {
+    compile = setup => {
         const file = `${this.input.directory}/${this.input.fileName}`
-        return shellEscape`wget --output-document ${file} ${this.input.url} && sudo dpkg --install ${file}`
-    }
-
-    compileShort = () => {
-        const file = `${this.input.directory}/${this.input.fileName}`
-        return shellEscape`wget -O ${file} ${this.input.url} && sudo dpkg -i ${file}`
+        const downloadScript = download.toFile(setup, this.input.url, file)
+        if (setup.format === "long") {
+            return downloadScript + shellEscape` && sudo apt deb ${file}`
+        } else {
+            return downloadScript + shellEscape` && sudo apt deb ${file}`
+        }
     }
 
 }

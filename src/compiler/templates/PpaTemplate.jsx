@@ -11,8 +11,12 @@ export default class extends Template {
         super(input)
     }
 
-    compileLong = () => shellEscape`sudo apt add-repository --yes ${this.input.name}`
-
-    compileShort = () => shellEscape`sudo apt add-repository --y ${this.input.name}`
+    compile =setup => {
+        if (setup.format === "long") {
+            return shellEscape`sudo apt add-repository --yes ${this.input.name}`
+        } else {
+            return shellEscape`sudo apt add-repository -y ${this.input.name}`
+        }
+    }
 
 }

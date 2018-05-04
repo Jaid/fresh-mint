@@ -12,12 +12,10 @@ export default class extends Template {
         super(input)
     }
 
-    compileLong = setup => {
+    compile = setup => {
         const currentShell = shells.find(shell => shell.name === setup.shell)
         const rcPath = currentShell?.rcPath || "~/.bashrc"
         return `. ${rcPath}`
     }
-
-    compileShort = this.compileLong
 
 }

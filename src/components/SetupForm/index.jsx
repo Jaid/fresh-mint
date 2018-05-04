@@ -8,14 +8,21 @@ const widgets = {
     install: InstallSwitch
 }
 
-export default class App extends React.Component {
+export default class SetupForm extends React.Component {
 
     static propTypes = {
         className: PropTypes.string,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        onInit: PropTypes.func
+    }
+
+    onRef = form => {
+        if (this.props.onInit) {
+            this.props.onInit(form.state)
+        }
     }
 
     // <span/> to get rid of submit button: https://github.com/mozilla-services/react-jsonschema-form/issues/705
-    render = () => <Form safeRenderCompletion={true} schema={schema.schema} uiSchema={schema.ui} widgets={widgets} onError={() => console.log(3)} {...this.props}><button>Copy</button></Form>
+    render = () => <Form schema={schema.schema} uiSchema={schema.ui} widgets={widgets} ref={this.onRef} {...this.props}><button>Copy</button></Form>
 
 }

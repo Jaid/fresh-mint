@@ -1,4 +1,4 @@
-import downloadToContext from "../lib/downloadToContext"
+import download from "../lib/download"
 import Template from "./Template"
 
 export default class extends Template {
@@ -11,8 +11,6 @@ export default class extends Template {
         super(input)
     }
 
-    compileLong = () => downloadToContext.long(this.input.url, "python3")
-
-    compileShort = () => downloadToContext.short(this.input.url, "python3")
+    compile = setup => download.toStream(setup, this.input.url, "python3")
 
 }
