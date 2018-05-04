@@ -5,6 +5,13 @@ export default installs.map(install => {
         install = {package: install}
     }
 
+    install = {
+        id: install.package,
+        title: install.package,
+        default: false,
+        ...install
+    }
+
     if (install.ppa && !install.ppa.startsWith("ppa:")) {
         install.ppa = `ppa:${install.ppa}`
     }
@@ -15,16 +22,22 @@ export default installs.map(install => {
         }
 
         install.deb = {
-            fileName: `${install.package}.deb`,
+            fileName: `${install.id}.deb`,
             directory: "/tmp",
             ...install.deb
         }
     }
 
-    return {
-        title: install.package,
-        id: install.package,
-        default: false,
-        ...install
+    if (install.list) {
+        if (typeof install.list === "string") {
+            install.list = {url: install.list}
+        }
+
+        install.list = {
+            fileName: `${install.id}.list`,
+            ...install.list
+        }
     }
+
+    return install
 })

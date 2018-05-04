@@ -18,13 +18,13 @@ const schema = {
 const ui = {installPackages: {}}
 
 for (let install of orderedInstalls) {
-    schema.properties.installPackages.properties[install.package] = {
+    schema.properties.installPackages.properties[install.id] = {
         type: "boolean",
         title: install.title,
         default: install.default
     }
 
-    ui.installPackages[install.package] = {
+    ui.installPackages[install.id] = {
         "ui:widget": "install",
         "ui:options": {label: false}
     }

@@ -7,12 +7,16 @@ import AptAddSourceTemplate from "./templates/AptAddSourceTemplate"
 import PpaTemplate from "./templates/PpaTemplate"
 import BashFromWebTemplate from "./templates/BashFromWebTemplate"
 import PythonFromWebTemplate from "./templates/PythonFromWebTemplate"
+import PythonYesFromWebTemplate from "./templates/PythonYesFromWebTemplate"
 import ReloadShellTemplate from "./templates/ReloadShellTemplate"
 import installs from "data/installs"
 import and from "and"
 
 export default setup => {
-    console.log(setup)
+    console.log({
+        setup,
+        installs
+    })
 
     try {
         if (lodash.isEmpty(setup)) {
@@ -55,36 +59,47 @@ export default setup => {
          */
 
         const script = new BashScript({
+            addSources: {title: "Configure additional software sources"},
             addPpas: {title: "Register additional PPAs"},
             aptInstall: {title: "Install apt packages"},
-            debInstall: {title: "Install Debian packages from web sources"}
+            debInstall: {title: "Install Debian packages from web sources"},
+            clean: {title: "Clean up"}
         })
 
-        const ppas = {}
+        const checkedInstalls = installs.filter(install => setup.installPackages[install.id])
 
-        for (const install of installs) {
-            if (!setup.installPackages[install.id]) {
-                continue
-            }
+        if (!lodash.isEmpty(checkedInstalls)) {
+            script.addCode("sudo apt clean", "clean")
+            const ppas = {}
 
-            if (install.ppa) {
-                if (ppas[install.ppa]) {
-                    ppas[install.ppa].push(install)
+            for (const install of checkedInstalls) {
+                if (install.ppa) {
+                    if (ppas[install.ppa]) {
+                        ppas[install.ppa].push(install)
+                    } else {
+                        ppas[install.ppa] = [install]
+                    }
+                }
+
+                if (install.deb) {
+                    script.addCode(new DebTemplate(install.deb).toString(setup), "debInstall")
                 } else {
-                    ppas[install.ppa] = [install]
+                    if (install.list) {
+                        script.addCode(new AptAddSourceTemplate(install.list).toString(setup), "addSources")
+                    }
+
+                    script.addCode(new AptInstallTemplate(install.id).toString(setup), "aptInstall")
                 }
             }
 
-            if (install.deb) {
-                script.addCode(new DebTemplate(install.deb).toString(setup), "debInstall")
-            } else {
-                script.addCode(new AptInstallTemplate(install.id).toString(setup), "aptInstall")
+            for (const [ppa, usingInstalls] of Object.entries(ppas)) {
+                const list = and(lodash.sortBy(usingInstalls.map(usingInstall => usingInstall.title)), "and")
+                script.addCode(new PpaTemplate(ppa).toString(setup, `PPA used for ${list}`), "addPpas")
             }
-        }
 
-        for (const [ppa, usingInstalls] of Object.entries(ppas)) {
-            const list = and(lodash.sortBy(usingInstalls.map(usingInstall => usingInstall.title)), "and")
-            script.addCode(new PpaTemplate(ppa).toString(setup, `PPA used for ${list}`), "addPpas")
+            if (checkedInstalls.find(install => install.list)) {
+                script.addCode(new PythonYesFromWebTemplate("https://raw.githubusercontent.com/davidfoerster/apt-remove-duplicate-source-entries/master/apt-remove-duplicate-source-entries.py").toString(setup, "Remove duplicate entries from source lists"), "clean")
+            }
         }
 
         /*

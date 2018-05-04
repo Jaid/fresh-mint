@@ -41,16 +41,17 @@
 
 - nvidia-current
 
-- package: google-chrome-stable
+- id: google-chrome
+  package: google-chrome-stable
   title: Google Chrome
-  list: google.list
-  listUrl: http://dl.google.com/linux/chrome/deb/
+  list: http://dl.google.com/linux/chrome/deb/
 
 - package: shutter
   title: Shutter
   default: true
 
-- package: virtualbox-qt
+- id: virtualbox
+  package: virtualbox-qt
   title: VirtualBox
 
 - package: mint-meta-codecs
@@ -86,7 +87,8 @@
 - package: i-nex
   ppa: i-nex-development-team/stable
 
-- package: spotify-client
+- id: spotify
+  package: spotify-client
   title: Spotify
 
 - package: obs-studio

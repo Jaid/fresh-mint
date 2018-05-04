@@ -19,7 +19,7 @@ class CodeGroup {
         }
     }
 
-    toString = () => `# ${this.title}\n${this.code.map(code => typeof code === "string" ? code : String(code)).join("\n")}`
+    toString = () => `# ${this.title}\n${this.code.join("\n")}`
 
 }
 
