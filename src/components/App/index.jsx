@@ -16,11 +16,11 @@ export default class App extends React.Component {
     }
 
     onFormChange = ({formData}) => {
-        this.setState({formData}) // Breaking and apparently unfixable: https://github.com/mozilla-services/react-jsonschema-form/issues/513
+        this.setState({formData}) // Breaking and apparently unfixable in combination with custom widget: https://github.com/mozilla-services/react-jsonschema-form/issues/513
     }
 
     render = () => <div className={css.content}>
-        <Form className={css.form} onChange={this.onFormChange}/>
+        <Form className={css.form} onChange={this.onFormChange} formData={this.state.formData} />
         <BareHighlight highlightjs={highlight} languages={["bash"]} className={css.code}>{compileBash(this.state.formData)}</BareHighlight>
     </div>
 

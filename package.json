@@ -79,6 +79,6 @@
     "scripts": {
         "build-prod": "NODE_ENV=production ./node_modules/.bin/webpack --config config/webpack.babel.js --output-path build",
         "build-dev": "NODE_ENV=development ./node_modules/.bin/webpack --config config/webpack.babel.js --output-path build",
-        "run-dev": "node_modules/.bin/nodemon --watch config/webpack.babel.js --watch yarn.lock --exec \"node --require @babel/register ./node_modules/.bin/webpack-serve --config config/webpack.babel.js\""
+        "run-dev": "node_modules/.bin/nodemon --watch config/webpack.babel.js --watch yarn.lock --exec 'node --require @babel/register ./node_modules/.bin/webpack-serve --config config/webpack.babel.js'"
     }
 }
