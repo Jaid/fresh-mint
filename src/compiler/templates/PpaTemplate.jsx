@@ -1,4 +1,4 @@
-import shellEscape from "../lib/shell-escape-tag"
+import shellEscape from "../lib/shellEscape"
 import Template from "./Template"
 
 export default class extends Template {

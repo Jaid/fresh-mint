@@ -1,4 +1,4 @@
-import shellEscape from "../lib/shell-escape-tag"
+import shellEscape from "../lib/shellEscape"
 
 exports.toStream = (setup, url, handlerScript) => {
     if (setup.format === "long") {

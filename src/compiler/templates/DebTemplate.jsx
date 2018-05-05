@@ -1,4 +1,4 @@
-import shellEscape from "../lib/shell-escape-tag"
+import shellEscape from "../lib/shellEscape"
 import download from "../lib/download"
 
 import Template from "./Template"
