@@ -125,7 +125,21 @@ const config = {
                 useShortDoctype: true
             }
         })
-    ]
+    ],
+    performance: {
+        maxAssetSize: 500000, // 500 KB
+        maxEntrypointSize: 1000000 // 1 MB
+    },
+    serve: { // webpack-serve config
+        dev: {
+            stats: {
+                builtAt: false,
+                timings: false,
+                modules: false,
+                colors: true
+            }
+        }
+    }
 }
 
 if (!isDevelopment) {
