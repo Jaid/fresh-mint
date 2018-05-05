@@ -20,6 +20,14 @@
 - package: python-pip
   title: Python pip
 
+- npm
+
+- package: yarn
+  title: Yarn
+  list:
+    downloadUrl: https://dl.yarnpkg.com/debian/
+    keyUrl: https://dl.yarnpkg.com/debian/pubkey.gpg
+
 - package: steam
   title: Steam
 
@@ -44,7 +52,9 @@
 - id: google-chrome
   package: google-chrome-stable
   title: Google Chrome
-  list: http://dl.google.com/linux/chrome/deb/
+  list:
+    downloadUrl: http://dl.google.com/linux/chrome/deb/
+    keyUrl: https://dl-ssl.google.com/linux/linux_signing_key.pub
 
 - package: shutter
   title: Shutter

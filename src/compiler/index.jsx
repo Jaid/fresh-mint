@@ -69,23 +69,30 @@ export default setup => {
         if (!lodash.isEmpty(checkedInstalls)) {
             script.addCode("sudo apt clean", "clean")
             const ppas = {}
+            const sourceLists = {}
 
             for (const install of checkedInstalls) {
                 if (install.ppa) {
-                    if (ppas[install.ppa]) {
-                        ppas[install.ppa].push(install)
+                    const id = install.ppa
+                    if (ppas[id]) {
+                        ppas[id].push(install)
                     } else {
-                        ppas[install.ppa] = [install]
+                        ppas[id] = [install]
+                    }
+                }
+
+                if (install.list) {
+                    const id = install.list.downloadUrl
+                    if (sourceLists[id]) {
+                        sourceLists[id].push(install)
+                    } else {
+                        sourceLists[id] = [install]
                     }
                 }
 
                 if (install.deb) {
                     script.addCode(new DebTemplate(install.deb).toString(setup), "debInstall")
                 } else {
-                    if (install.list) {
-                        script.addCode(new AptAddSourceTemplate(install.list).toString(setup), "addSources")
-                    }
-
                     script.addCode(new AptInstallTemplate(install.package).toString(setup), "aptInstall")
                 }
             }
@@ -93,6 +100,11 @@ export default setup => {
             for (const [ppa, usingInstalls] of Object.entries(ppas)) {
                 const list = and(lodash.sortBy(usingInstalls.map(usingInstall => usingInstall.title)), "and")
                 script.addCode(new PpaTemplate(ppa).toString(setup, `PPA used for ${list}`), "addPpas")
+            }
+
+            for (const usingInstalls of Object.values(sourceLists)) {
+                const list = and(lodash.sortBy(usingInstalls.map(usingInstall => usingInstall.title)), "and")
+                script.addCode(new AptAddSourceTemplate(usingInstalls[0].list).toString(setup, `Source list used for ${list}`), "addSources")
             }
 
             if (checkedInstalls.find(install => install.list)) {
@@ -136,7 +148,7 @@ export default setup => {
          * script.addCode(new AptAddSourceTemplate(aptSource).compile(setup))
          * }
          * }
-         *
+         *f
          * if (setup.aptUpgrade) {
          * script.addCode(new PythonFromWebTemplate("https://raw.githubusercontent.com/davidfoerster/apt-remove-duplicate-source-entries/master/apt-remove-duplicate-source-entries.py").compile(setup))
          * }

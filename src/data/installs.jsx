@@ -30,11 +30,13 @@ export default installs.map(install => {
 
     if (install.list) {
         if (typeof install.list === "string") {
-            install.list = {url: install.list}
+            install.list = {downloadUrl: install.list}
         }
 
         install.list = {
             fileName: `${install.id}.list`,
+            source: `deb ${install.list.downloadUrl} stable main`,
+            directory: "/etc/apt/sources.list.d",
             ...install.list
         }
     }
