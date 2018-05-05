@@ -133,10 +133,11 @@ const config = {
     serve: { // webpack-serve config
         dev: {
             stats: {
+                colors: true,
                 builtAt: false,
                 timings: false,
                 modules: false,
-                colors: true
+                performance: false
             }
         }
     }
