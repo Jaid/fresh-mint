@@ -8,7 +8,6 @@ export default installs.map(install => {
     install = {
         id: install.package,
         title: install.package,
-        default: false,
         ...install
     }
 

@@ -64,7 +64,7 @@ export default setup => {
             clean: {title: "Clean up"}
         })
 
-        const checkedInstalls = installs.filter(install => setup.installPackages[install.id])
+        const checkedInstalls = installs.filter(install => setup.installs[install.id])
 
         if (!lodash.isEmpty(checkedInstalls)) {
             script.addCode("sudo apt clean", "clean")

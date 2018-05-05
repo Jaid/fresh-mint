@@ -8,23 +8,23 @@ const schema = {
     title: "Setup",
     type: "object",
     properties: {
-        installPackages: {
+        installs: {
             type: "object",
             properties: {}
         }
     }
 }
 
-const ui = {installPackages: {}}
+const ui = {installs: {}}
 
 for (let install of orderedInstalls) {
-    schema.properties.installPackages.properties[install.id] = {
+    schema.properties.installs.properties[install.id] = {
         type: "boolean",
         title: install.title,
         default: install.default
     }
 
-    ui.installPackages[install.id] = {
+    ui.installs[install.id] = {
         "ui:widget": "install",
         "ui:options": {label: false}
     }

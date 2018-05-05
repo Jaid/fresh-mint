@@ -1,19 +1,17 @@
-- package: build-essential
-  default: true
+- build-essential
 
-- package: software-properties-common
-  default: true
+- software-properties-common
 
 - package: git
   title: Git
-  default: true
 
 - package: oracle-java9-installer
+  id: java-9
   title: Java 9
   ppa: webupd8team/java
-  default: true
 
 - package: oracle-java8-installer
+  id: java-8
   title: Java 8
   ppa: webupd8team/java
 
@@ -43,7 +41,6 @@
   deb: https://discordapp.com/api/download?platform=linux&format=deb
 
 - package: atom
-  default: true
   title: Atom Text Editor
   ppa: webupd8team/atom
 
@@ -58,26 +55,21 @@
 
 - package: shutter
   title: Shutter
-  default: true
 
 - id: virtualbox
   package: virtualbox-qt
   title: VirtualBox
 
-- package: mint-meta-codecs
-  default: true
+- mint-meta-codecs
 
 - package: ffmpeg
   title: FFmpeg
-  default: true
 
 - package: "x264"
   title: x264 Codec
-  default: true
 
 - package: vlc
   title: VLC Media Player
-  default: true
 
 - package: blender # Updates seem to be very delayed (My Blender version on Steam is 2.79b and my Blender version on apt is 2.76b)
   title: Blender

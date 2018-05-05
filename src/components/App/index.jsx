@@ -7,12 +7,13 @@ import "./theme.scss"
 import css from "./style.postcss"
 import SetupForm from "components/SetupForm"
 import compileBash from "../../compiler"
+import defaultSetup from "data/defaultSetup.yml"
 
 export default class App extends React.Component {
 
     constructor() {
         super()
-        this.state = {formData: {}}
+        this.state = {formData: defaultSetup}
     }
 
     onFormChange = ({formData}) => {
