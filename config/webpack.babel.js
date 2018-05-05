@@ -108,6 +108,7 @@ const config = {
         ]
     },
     plugins: [
+        new webpack.EnvironmentPlugin(["NODE_ENV"]),
         new HtmlWebpackPlugin({
             appDescription,
             template: `!!ejs-compiled-loader!${path.resolve(__dirname, "html.ejs")}`,
@@ -138,7 +139,7 @@ if (!isDevelopment) {
 }
 
 if (isDevelopment) {
-    config.devtool = "cheap-module-source-map"
+    config.devtool = "eval"
 }
 
 if (process.env.USE_WEBPACK_SERVE) {

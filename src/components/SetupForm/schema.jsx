@@ -2,7 +2,7 @@ import installs from "data/installs"
 import removals from "data/removals"
 import lodash from "lodash"
 
-const orderedInstalls = lodash.orderBy(installs, ["default", install => install.title.toLowerCase()], ["desc", "asc"])
+const orderedInstalls = lodash.sortBy(installs, [install => install.title.toLowerCase()])
 
 const schema = {
     title: "Setup",

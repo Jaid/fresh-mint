@@ -8,8 +8,9 @@ import css from "./style.postcss"
 import SetupForm from "components/SetupForm"
 import compileBash from "../../compiler"
 import defaultSetup from "data/defaultSetup.yml"
+import {hot} from "react-hot-loader"
 
-export default class App extends React.Component {
+class App extends React.Component {
 
     constructor() {
         super()
@@ -20,9 +21,14 @@ export default class App extends React.Component {
         this.setState({formData})
     }
 
-    render = () => <div className={css.content}>
-        <SetupForm className={css.form} onChange={this.onFormChange} formData={this.state.formData} onInit={this.onFormChange} />
-        <BareHighlight highlightjs={highlight} languages={["bash"]} className={css.code}>{compileBash(this.state.formData)}</BareHighlight>
-    </div>
+    render() {
+        return <div className={css.content}>
+            <SetupForm className={css.form} onChange={this.onFormChange} formData={this.state.formData} onInit={this.onFormChange} />
+            <BareHighlight highlightjs={highlight} languages={["bash"]} className={css.code}>{compileBash(this.state.formData)}</BareHighlight>
+        </div>
+    }
 
 }
+
+// export default process.env.NODE_ENV === "development" ? hot(module)(App) : App
+export default hot(module)(App)

@@ -29,19 +29,21 @@ export default class InstallSwitch extends React.Component {
         this.props.onChange(value)
     }
 
-    render = () => <div className={css.container}>
-        <Switch
-            className={css.switch}
-            checkedIcon=<span className={css.installText} />
-            uncheckedIcon={null}
-            width={100}
-            onColor="#70c370"
-            boxShadow="0 0 7px #00000066"
-            id={this.props.id}
-            checked={this.props.value}
-            onChange={this.onChange}
-        />
-        <label htmlFor={this.props.id} className={classnames(css.label, this.props.value && css.install)}>{this.props.label}</label>
-    </div>
+    render() {
+        return <div className={css.container}>
+            <Switch
+                className={css.switch}
+                checkedIcon=<span className={css.installText} />
+                uncheckedIcon={null}
+                width={100}
+                onColor="#70c370"
+                boxShadow="0 0 7px #00000066"
+                id={this.props.id}
+                checked={this.props.value}
+                onChange={this.onChange}
+            />
+            <label htmlFor={this.props.id} className={classnames(css.label, this.props.value && css.install)}>{this.props.label}</label>
+        </div>
+    }
 
 }

@@ -17,7 +17,8 @@ if (!isDevelopment) {
 }
 
 if (isDevelopment) {
-    config.sourceMaps = "inline"
+    plugins.push("react-hot-loader/babel")
+    // config.sourceMaps = "inline"
 }
 
 Object.assign(config, {

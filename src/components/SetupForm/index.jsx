@@ -23,6 +23,8 @@ export default class SetupForm extends React.Component {
     }
 
     // <span/> to get rid of submit button: https://github.com/mozilla-services/react-jsonschema-form/issues/705
-    render = () => <Form schema={schema.schema} uiSchema={schema.ui} widgets={widgets} ref={this.onRef} {...this.props}><button>Copy</button></Form>
+    render() {
+        return <Form schema={schema.schema} uiSchema={schema.ui} widgets={widgets} ref={this.onRef} {...this.props}><button>Copy</button></Form>
+    }
 
 }
