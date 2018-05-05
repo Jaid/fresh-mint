@@ -30,7 +30,10 @@ module.exports = ({options}) => {
                 ],
                 "unspecified-properties-position": "bottomAlphabetical"
             },
-            cssnano: null
+            cssnano: { // Minifies output
+                autoprefixer: false, // Remove in version 4 - https://github.com/ben-eb/cssnano/blob/v3.10.0/README.md
+                safe: true // Remove in version 4 - https://github.com/ben-eb/cssnano/blob/v3.10.0/README.md
+            }
         })
     }
 

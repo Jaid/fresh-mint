@@ -9,5 +9,8 @@
 # Build folder
 /build/
 
+# Webpack
+/webpackStats.json
+
 # Jest
 /coverage/

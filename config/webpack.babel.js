@@ -127,19 +127,8 @@ const config = {
         })
     ],
     performance: {
-        maxAssetSize: 500000, // 500 KB
-        maxEntrypointSize: 1000000 // 1 MB
-    },
-    serve: { // webpack-serve config
-        dev: {
-            stats: {
-                colors: true,
-                builtAt: false,
-                timings: false,
-                modules: false,
-                performance: false
-            }
-        }
+        maxAssetSize: 1000000, // 1 MB
+        maxEntrypointSize: 3000000 // 3 MB
     }
 }
 
@@ -150,6 +139,20 @@ if (!isDevelopment) {
 
 if (isDevelopment) {
     config.devtool = "cheap-module-source-map"
+}
+
+if (process.env.USE_WEBPACK_SERVE) {
+    config.serve = { // webpack-serve config
+        dev: {
+            stats: {
+                colors: true,
+                builtAt: false,
+                timings: false,
+                modules: false,
+                performance: false
+            }
+        }
+    }
 }
 
 module.exports = config
