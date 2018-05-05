@@ -31,7 +31,7 @@
         "babel-plugin-lodash": "^3.3.2",
         "babel-preset-minify": "0.4",
         "css-loader": "^0.28.11",
-        "cssnano": "^3.10.0",
+        "cssnano": "^4.0.0-rc.2",
         "dist-size": "^0.4.0",
         "ejs-compiled-loader": "^1.1.0",
         "eslint": "^4.18.2",
@@ -83,7 +83,9 @@
         "build-prod": "rm --recursive --force build && NODE_ENV=production ./node_modules/.bin/webpack --config config/webpack.babel.js --output-path build",
         "profile-prod": "NODE_ENV=production ./node_modules/.bin/webpack --config config/webpack.babel.js --output-path build --profile --json > webpackStats.json",
         "build-dev": "NODE_ENV=development ./node_modules/.bin/webpack --config config/webpack.babel.js --output-path build",
-        "run-dev": "USE_WEBPACK_SERVE=true node_modules/.bin/nodemon --watch config/webpack.babel.js --watch yarn.lock --exec 'node --require @babel/register ./node_modules/.bin/webpack-serve --config config/webpack.babel.js'",
+        "start": "yarn run start-prod",
+        "start-prod": "USE_WEBPACK_SERVE=true node_modules/.bin/nodemon --watch config/webpack.babel.js --watch yarn.lock --exec 'node --require @babel/register ./node_modules/.bin/webpack-serve --config config/webpack.babel.js'",
+        "start-dev": "USE_WEBPACK_SERVE=true node_modules/.bin/nodemon --watch config/webpack.babel.js --watch yarn.lock --exec 'node --require @babel/register ./node_modules/.bin/webpack-serve --config config/webpack.babel.js'",
         "dist-size": "yarn run build-prod && ./node_modules/.bin/dist-size build",
         "bundle-size": "yarn run profile-prod && ./node_modules/.bin/webpack-bundle-analyzer webpackStats.json build"
     }
