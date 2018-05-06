@@ -5,6 +5,8 @@ import AptInstallTemplate from "./templates/AptInstallTemplate"
 import AptAddSourceTemplate from "./templates/AptAddSourceTemplate"
 import PpaTemplate from "./templates/PpaTemplate"
 import ExecuteFromWebTemplate from "./templates/ExecuteFromWebTemplate"
+import SedTemplate from "./templates/SedTemplate"
+import EditConfigTemplate from "./templates/EditConfigTemplate"
 import ReloadShellTemplate from "./templates/ReloadShellTemplate"
 import AppendToFileTemplate from "./templates/AppendToFileTemplate"
 import installs from "data/installs"
@@ -125,6 +127,10 @@ export default setup => {
                 escapeFile: false,
                 escapeContent: false
             }).toString(setup), "disablePasswordPrompt")
+        }
+
+        if (setup.swappiness) {
+            script.addCode(new EditConfigTemplate("vm.swappiness", setup.swappiness, "/etc/sysctl.conf", {sudo: true}).toString(setup))
         }
 
         /*

@@ -9,6 +9,7 @@ export default class extends Template {
         this.options = {
             escapeContent: true,
             escapeFile: true,
+            sudo: true,
             ...options
         }
     }
@@ -16,7 +17,8 @@ export default class extends Template {
     compile = setup => {
         const content = this.options.escapeContent ? shellEscape`${this.input}` : this.input
         const file = this.escapeFile ? shellEscape`${this.file}` : this.file
-        return `echo ${content} | sudo tee ${setup.format === "long" ? "--append" : "-a"} ${file}`
+        const tool = this.options.sudo ? "sudo tee" : "tee"
+        return `echo ${content} | ${tool} ${setup.format === "long" ? "--append" : "-a"} ${file}`
     }
 
 }

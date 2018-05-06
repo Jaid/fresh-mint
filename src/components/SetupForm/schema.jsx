@@ -4,6 +4,8 @@ import lodash from "lodash"
 
 const orderedInstalls = lodash.sortBy(installs, [install => install.title.toLowerCase()])
 
+const swappinessValues = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 96, 97, 98, 99, 100]
+
 const schema = {
     title: "Setup",
     type: "object",
@@ -13,6 +15,10 @@ const schema = {
             default: "long",
             enum: ["long", "short", "minified"],
             enumNames: ["Descriptive", "Compact (minify arguments)", "Compressed (minify code)"]
+        },
+        colors: {
+            type: "boolean",
+            title: "Colored terminal log"
         },
         aptUpgrade: {
             type: "boolean",
@@ -29,6 +35,13 @@ const schema = {
                 enum: orderedInstalls.map(install => install.id)
             },
             uniqueItems: true
+        },
+        swappiness: {
+            type: "string",
+            title: "Swappiness",
+            enum: [0, ...swappinessValues],
+            enumNames: ["Default", ...swappinessValues.map(value => `${value}%`)],
+            default: "0"
         }
     }
 }

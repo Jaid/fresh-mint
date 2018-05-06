@@ -22,7 +22,7 @@ class App extends React.Component {
 
     render() {
         return <div className={css.content}>
-            <SetupForm className={css.form} onChange={this.onFormChange} formData={this.state.formData} onInit={this.onFormChange} />
+            <SetupForm className={css.form} onChange={this.onFormChange} formData={this.state.formData}/>
             <BareHighlight highlightjs={highlight} languages={["bash"]} className={css.code}>{compileBash(this.state.formData)}</BareHighlight>
         </div>
     }
