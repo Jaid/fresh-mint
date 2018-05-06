@@ -129,7 +129,7 @@ export default setup => {
             }).toString(setup), "disablePasswordPrompt")
         }
 
-        if (setup.swappiness) {
+        if (setup.swappiness !== "skip") {
             script.addCode(new EditConfigTemplate("vm.swappiness", setup.swappiness, "/etc/sysctl.conf", {sudo: true}).toString(setup))
         }
 

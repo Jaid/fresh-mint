@@ -5,6 +5,8 @@
 - package: git
   title: Git
 
+- zsh
+
 - package: oracle-java9-installer
   id: java-9
   title: Java 9
@@ -81,9 +83,6 @@
 
 - package: audacity
   title: Audacity
-
-- package: zsh
-  title: zsh
 
 - package: thunderbird
   title: Mozilla Thunderbird

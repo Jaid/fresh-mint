@@ -2,7 +2,7 @@ colors: true
 aptUpgrade: true
 disablePasswordPrompt: false
 format: long
-swappiness: 0
+swappiness: skip
 installs:
   - atom
   - build-essential
