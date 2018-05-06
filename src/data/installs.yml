@@ -62,6 +62,10 @@
 
 - mint-meta-codecs
 
+- package: ttf-mscorefonts-installer
+  id: microsoft-fonts
+  title: Microsoft Fonts
+
 - package: ffmpeg
   title: FFmpeg
 
@@ -97,3 +101,6 @@
 - package: obs-studio
   title: Open Broadcaster Software
   ppa: obsproject/obs-studio
+
+- package: lmms
+  title: LMMS
