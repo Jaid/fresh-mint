@@ -1,15 +1,28 @@
 .content {
     display: flex;
+    @media only screen and (max-width: 768px) {
+        display: block;
+    }
+    height: 100vh;
     > pre {
         flex: 1;
+        margin-bottom: 0;
         background: #282c34;
         box-shadow: 0 0 7px #00000066;
         white-space: pre-line;
+    }
+    ::-webkit-scrollbar {
+        background: transparent;
+        width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #00000066;
     }
 }
 
 .form {
     padding: 1em;
+    overflow: auto;
     div:global(.checkbox) {
         &:hover {
             input {
