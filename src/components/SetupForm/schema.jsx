@@ -5,6 +5,13 @@ import lodash from "lodash"
 const orderedInstalls = lodash.sortBy(installs, [install => install.title.toLowerCase()])
 
 const swappinessValues = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 96, 97, 98, 99, 100]
+const swapComments = {
+    1: "Swap only if really necessary",
+    5: "Recommended for RAM monsters",
+    10: "Recommended for good PCs",
+    60: "Linux Mint default",
+    100: "Swap aggressively"
+}
 
 const schema = {
     title: "Setup",
@@ -40,7 +47,7 @@ const schema = {
             type: "string",
             title: "Swappiness",
             enum: [0, ...swappinessValues],
-            enumNames: ["Default", ...swappinessValues.map(value => `${value}%`)],
+            enumNames: ["No changes", ...swappinessValues.map(value => `${value}% ${swapComments[value] ? ` (${swapComments[value]})` : ""}`)],
             default: "0"
         }
     }
