@@ -11,11 +11,6 @@ import installs from "data/installs"
 import and from "and"
 
 export default setup => {
-    console.log({
-        setup,
-        installs
-    })
-
     try {
         if (lodash.isEmpty(setup)) {
             return ""

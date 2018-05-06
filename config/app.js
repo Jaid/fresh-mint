@@ -50,8 +50,7 @@ module.exports = {
     },
     googleFonts: [
         "Ubuntu:400,700&subset=latin-ext",
-        "Roboto:400,700&subset=latin-ext",
-        "Acme:400,700&subset=latin-ext"
+        "Source Code Pro:400,700&subset=latin-ext"
     ],
     googleAnalytics: { // https://analytics.google.com/analytics/web
         trackingId: googleAnalyticsTrackingId

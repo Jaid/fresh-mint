@@ -88,7 +88,7 @@
         "build-dev": "NODE_ENV=development ./node_modules/.bin/webpack --config config/webpack.babel.js --output-path build",
         "start": "yarn run start-prod",
         "start-prod": "NODE_ENV=production ./node_modules/.bin/webpack-serve --open --config config/webpack.babel.js",
-        "start-dev": "USE_WEBPACK_SERVE=true NODE_ENV=development node_modules/.bin/nodemon --watch config/webpack.babel.js --watch config/babel.js --watch yarn.lock --exec 'node --require @babel/register ./node_modules/.bin/webpack-serve --config config/webpack.babel.js'",
+        "start-dev": "USE_WEBPACK_SERVE=true NODE_ENV=development node_modules/.bin/nodemon --watch config/webpack.babel.js --watch config/babel.js --watch config/app.js --watch yarn.lock --exec 'node --require @babel/register ./node_modules/.bin/webpack-serve --config config/webpack.babel.js'",
         "dist-size": "yarn run build-prod && ./node_modules/.bin/dist-size build",
         "bundle-size": "yarn run profile-prod && ./node_modules/.bin/webpack-bundle-analyzer webpackStats.json build"
     }

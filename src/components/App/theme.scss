@@ -20,7 +20,7 @@ $theme-colors: (
 $font-family-sans-serif: Ubuntu, Roboto, Arial, sans-serif;
 $font-family-monospace: 'Source Code Pro', 'Ubuntu Mono', 'Courier New', monospace;
 
-$form-group-margin-bottom: 1px;
+$form-group-margin-bottom: 1em;
 
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
