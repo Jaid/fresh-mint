@@ -6,6 +6,7 @@ import AptAddSourceTemplate from "./templates/AptAddSourceTemplate"
 import PpaTemplate from "./templates/PpaTemplate"
 import ExecuteFromWebTemplate from "./templates/ExecuteFromWebTemplate"
 import ReloadShellTemplate from "./templates/ReloadShellTemplate"
+import AppendToFileTemplate from "./templates/AppendToFileTemplate"
 import installs from "data/installs"
 import and from "and"
 
@@ -56,6 +57,12 @@ export default setup => {
          */
 
         const script = new BashScript({
+            disablePasswordPrompt: {title: "Disable password prompt for sudo"},
+            aptUpdate: {
+                title: "Update caches",
+                code: ["sudo apt update"]
+            },
+            aptUpgrade: {title: "Upgrade preinstalled packages"},
             addSources: {title: "Configure additional software sources"},
             addPpas: {title: "Register additional PPAs"},
             aptInstall: {title: "Install apt packages"},
@@ -66,7 +73,6 @@ export default setup => {
         const checkedInstalls = installs.filter(install => setup.installs.includes(install.id))
 
         if (!lodash.isEmpty(checkedInstalls)) {
-            script.addCode("sudo apt clean", "clean")
             const ppas = {}
             const sourceLists = {}
 
@@ -106,9 +112,24 @@ export default setup => {
                 script.addCode(new AptAddSourceTemplate(usingInstalls[0].list).toString(setup, `Source list used for ${list}`), "addSources")
             }
 
-            if (checkedInstalls.find(install => install.list)) {
+            if (checkedInstalls.find(install => install.list)) { // Only run if at least 1 installed package adds a source list
                 script.addCode(new ExecuteFromWebTemplate("https://raw.githubusercontent.com/davidfoerster/apt-remove-duplicate-source-entries/master/apt-remove-duplicate-source-entries.py", `sudo python3 - ${setup.format === "long" ? "--yes" : "-y"}`).toString(setup, "Remove duplicate entries from source lists"), "clean")
             }
+
+            if (checkedInstalls.find(install => !install.deb)) { // Only run if at least 1 non-deb package is installed
+                script.addCode("sudo apt clean", "clean")
+            }
+        }
+
+        if (setup.aptUpgrade) {
+            script.addCode("sudo apt full-upgrade", "aptUpgrade")
+        }
+
+        if (setup.disablePasswordPrompt) {
+            script.addCode(new AppendToFileTemplate("\"$USER ALL=NOPASSWD: ALL\"", "\"/etc/sudoers.d/$USER\"", {
+                escapeFile: false,
+                escapeContent: false
+            }).toString(setup), "disablePasswordPrompt")
         }
 
         /*

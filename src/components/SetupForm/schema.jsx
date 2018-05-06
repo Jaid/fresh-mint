@@ -8,6 +8,14 @@ const schema = {
     title: "Setup",
     type: "object",
     properties: {
+        aptUpgrade: {
+            type: "boolean",
+            title: "Upgrade preinstalled packages"
+        },
+        disablePasswordPrompt: {
+            type: "boolean",
+            title: "Disable sudo password prompt"
+        },
         format: {
             type: "string",
             default: "long",

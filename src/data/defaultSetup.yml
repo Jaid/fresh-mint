@@ -1,3 +1,5 @@
+aptUpgrade: true
+disablePasswordPrompt: false
 format: long
 installs:
   - atom
