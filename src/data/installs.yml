@@ -71,7 +71,8 @@
 - package: vlc
   title: VLC Media Player
 
-- package: blender # Updates seem to be very delayed (My Blender version on Steam is 2.79b and my Blender version on apt is 2.76b)
+- package: blender
+  ppa: thomas-schiex/blender  # ppa-less updates seem to be very delayed (My Blender version on Steam is 2.79b and my Blender version on apt is 2.76b)
   title: Blender
 
 - package: audacity

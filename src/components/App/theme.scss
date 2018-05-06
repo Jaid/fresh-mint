@@ -19,9 +19,8 @@ $theme-colors: (
 
 $font-family-sans-serif: Ubuntu, Roboto, Arial, sans-serif;
 $font-family-monospace: 'Source Code Pro', 'Ubuntu Mono', 'Courier New', monospace;
-$font-family-base: $font-family-sans-serif;
 
-$form-group-margin-bottom: 2px;
+$form-group-margin-bottom: 1px;
 
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";

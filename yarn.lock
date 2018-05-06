@@ -2045,6 +2045,10 @@ base@^0.11.1:
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
 
+bash-minifier@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/bash-minifier/-/bash-minifier-0.1.2.tgz#831b1edb869ddb098e6897e654f6cd60071ff828"
+
 bcrypt-pbkdf@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.1.tgz#63bc5dcb61331b92bc05fd528953c33462a06f8d"

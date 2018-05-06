@@ -8,7 +8,6 @@ import css from "./style.postcss"
 import SetupForm from "components/SetupForm"
 import compileBash from "../../compiler"
 import defaultSetup from "data/defaultSetup.yml"
-import {hot} from "react-hot-loader"
 
 class App extends React.Component {
 
@@ -30,5 +29,4 @@ class App extends React.Component {
 
 }
 
-// export default process.env.NODE_ENV === "development" ? hot(module)(App) : App
-export default hot(module)(App)
+export default process.env.NODE_ENV === "development" ? require("react-hot-loader").hot(module)(App) : App

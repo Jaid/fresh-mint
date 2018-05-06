@@ -8,6 +8,12 @@ const schema = {
     title: "Setup",
     type: "object",
     properties: {
+        format: {
+            type: "string",
+            default: "long",
+            enum: ["long", "short", "minified"],
+            enumNames: ["Descriptive", "Compact (minify arguments)", "Compressed (minify code)"]
+        },
         installs: {
             type: "object",
             properties: {}

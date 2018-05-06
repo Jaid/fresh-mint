@@ -1,4 +1,5 @@
 import lodash from "lodash"
+import minifyBash from "bash-minifier"
 
 class CodeGroup {
 
@@ -49,9 +50,17 @@ export default class {
         }
     }
 
-    toString = () => `${this.header}\n\n${Object.values(this.groups)
-        .filter(group => group.code.length)
-        .map(group => group.toString())
-        .join("\n\n")}`
+    toString = (minify = false) => {
+        let script = Object.values(this.groups)
+            .filter(group => group.code.length)
+            .map(group => group.toString())
+            .join("\n\n")
+
+        if (minify) {
+            return `${this.header}\n${minifyBash(script)}`
+        } else {
+            return `${this.header}\n\n${script}`
+        }
+    }
 
 }

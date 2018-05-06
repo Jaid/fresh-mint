@@ -166,7 +166,7 @@ export default setup => {
          * code.push(". ~/.bashrc")
          * }
          */
-        return script.toString()
+        return script.toString(setup.format === "minified")
     } catch (e) {
         console.error(e)
         return `# Bash script compilation failed!\n# ${e}`

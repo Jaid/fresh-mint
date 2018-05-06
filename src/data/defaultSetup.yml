@@ -1,7 +1,7 @@
+format: long
 installs:
   atom: true
   build-essential: true
   ffmpeg: true
-  git: true
   mint-meta-codecs: true
   software-propeties-common: true
