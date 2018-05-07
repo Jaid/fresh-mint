@@ -50,7 +50,17 @@ const schema = {
     title: "Setup",
     type: "object",
     properties: {
+        installs: {
+            title: "Install packages",
+            type: "array",
+            items: {
+                type: "string",
+                enum: orderedInstalls.map(install => install.id)
+            },
+            uniqueItems: true
+        },
         format: {
+            title: "Code format",
             type: "string",
             default: "long",
             enum: ["long", "short", "minified"],
@@ -58,6 +68,7 @@ const schema = {
         },
         downloadTool: {
             type: "string",
+            title: "Download tool",
             default: "curl",
             enum: ["curl", "wget"],
             enumNames: ["cURL", "Wget"]
@@ -73,14 +84,6 @@ const schema = {
         disablePasswordPrompt: {
             type: "boolean",
             title: "Disable sudo password prompt"
-        },
-        installs: {
-            type: "array",
-            items: {
-                type: "string",
-                enum: orderedInstalls.map(install => install.id)
-            },
-            uniqueItems: true
         },
         swappiness: {
             type: "string",

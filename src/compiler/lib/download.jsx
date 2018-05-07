@@ -2,7 +2,7 @@ import shellEscape from "../lib/shellEscape"
 
 exports.toStream = (setup, url, handlerScript) => {
     if (setup.downloadTool === "curl") {
-        if (setup.format !== "long") {
+        if (setup.format === "long") {
             return shellEscape`curl --silent --fail --location --retry 3 ${url} | ` + handlerScript
         } else {
             return shellEscape`curl -fsL --retry 3 ${url} | ` + handlerScript
