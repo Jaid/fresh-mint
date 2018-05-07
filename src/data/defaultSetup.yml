@@ -8,3 +8,5 @@ installs:
   - atom
   - build-essential
   - mint-meta-codecs
+removals:
+  - gnome-orca

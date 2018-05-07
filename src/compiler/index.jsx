@@ -2,6 +2,7 @@ import lodash from "lodash"
 import BashScript from "./BashScript"
 import DebTemplate from "./templates/DebTemplate"
 import AptInstallTemplate from "./templates/AptInstallTemplate"
+import AptRemoveTemplate from "./templates/AptRemoveTemplate"
 import AptAddSourceTemplate from "./templates/AptAddSourceTemplate"
 import PpaTemplate from "./templates/PpaTemplate"
 import ExecuteFromWebTemplate from "./templates/ExecuteFromWebTemplate"
@@ -10,6 +11,7 @@ import EditConfigTemplate from "./templates/EditConfigTemplate"
 import ReloadShellTemplate from "./templates/ReloadShellTemplate"
 import AppendToFileTemplate from "./templates/AppendToFileTemplate"
 import installs from "data/installs"
+import removals from "data/removals"
 import and from "and"
 
 export default setup => {
@@ -59,6 +61,7 @@ export default setup => {
                 title: "Update caches",
                 code: ["sudo apt update"]
             },
+            aptRemove: {title: "Remove unneeded preinstalled packages"},
             aptUpgrade: {title: "Upgrade preinstalled packages"},
             addSources: {title: "Configure additional software sources"},
             addPpas: {title: "Register additional PPAs"},
@@ -68,6 +71,11 @@ export default setup => {
         })
 
         const checkedInstalls = installs.filter(install => setup.installs.includes(install.id))
+        const checkedRemovals = removals.filter(removal => setup.removals.includes(removal.id))
+
+        for (const removal of checkedRemovals) {
+            script.addCode(new AptRemoveTemplate(removal).toString(setup), "aptRemove")
+        }
 
         if (!lodash.isEmpty(checkedInstalls)) {
             const ppas = {}
@@ -95,7 +103,7 @@ export default setup => {
                 if (install.deb) {
                     script.addCode(new DebTemplate(install.deb).toString(setup), "debInstall")
                 } else {
-                    script.addCode(new AptInstallTemplate(install.package).toString(setup), "aptInstall")
+                    script.addCode(new AptInstallTemplate(install).toString(setup), "aptInstall")
                 }
             }
 

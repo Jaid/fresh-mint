@@ -3,6 +3,7 @@ import removals from "data/removals"
 import lodash from "lodash"
 
 const orderedInstalls = lodash.sortBy(installs, [install => install.title.toLowerCase()])
+const orderedRemovals = lodash.sortBy(removals, [removal => removal.title.toLowerCase()])
 
 const swappinessValues = [
     "skip",
@@ -59,6 +60,15 @@ const schema = {
             },
             uniqueItems: true
         },
+        removals: {
+            title: "Remove preinstalled packages",
+            type: "array",
+            items: {
+                type: "string",
+                enum: orderedRemovals.map(removal => removal.id)
+            },
+            uniqueItems: true
+        },
         format: {
             title: "Code format",
             type: "string",
@@ -96,7 +106,8 @@ const schema = {
 }
 
 const ui = {
-    installs: {"ui:widget": "installs"}
+    installs: {"ui:widget": "installs"},
+    removals: {"ui:widget": "removals"}
 }
 
 /*

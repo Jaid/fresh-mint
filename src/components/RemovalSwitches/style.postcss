@@ -1,0 +1,19 @@
+.label {
+    margin-left: 5px;
+    vertical-align: sub;
+
+    &:not(.install) {
+        color: gray;
+    }
+}
+
+.removeText {
+    &:before {
+        content: "Remove";
+        font-weight: bold;
+        vertical-align: middle;
+        margin-left: 0.5rem;
+        color: white;
+        text-shadow: 0 0 3px #00000099;
+    }
+}

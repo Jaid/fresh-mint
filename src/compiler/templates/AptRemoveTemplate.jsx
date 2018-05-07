@@ -5,9 +5,9 @@ export default class extends Template {
 
     compile = setup => {
         if (setup.format === "long") {
-            return shellEscape`sudo apt install --yes ${this.input.package}`
+            return shellEscape`sudo apt remove --yes ${this.input.package}`
         } else {
-            return shellEscape`sudo apt install -y ${this.input.package}`
+            return shellEscape`sudo apt remove -y ${this.input.package}`
         }
     }
 

@@ -3,9 +3,11 @@ import PropTypes from "prop-types"
 import Form from "react-jsonschema-form"
 import schema from "./schema"
 import InstallSwitches from "components/InstallSwitches"
+import RemovalSwitches from "components/RemovalSwitches"
 
 const widgets = {
-    installs: InstallSwitches
+    installs: InstallSwitches,
+    removals: RemovalSwitches
 }
 
 export default class SetupForm extends React.Component {
