@@ -119,7 +119,7 @@ export default setup => {
         }
 
         if (setup.aptUpgrade) {
-            script.addCode("sudo apt full-upgrade", "aptUpgrade")
+            script.addCode(`sudo apt full-upgrade ${setup.format === "long" ? "--yes" : "-y"}`, "aptUpgrade")
         }
 
         if (setup.disablePasswordPrompt) {

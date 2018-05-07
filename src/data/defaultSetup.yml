@@ -7,4 +7,3 @@ installs:
   - atom
   - build-essential
   - mint-meta-codecs
-  - software-properties-common

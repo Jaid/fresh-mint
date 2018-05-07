@@ -134,7 +134,10 @@ const config = {
 }
 
 if (!isDevelopment) {
-    config.plugins.push(new LodashModuleReplacementPlugin)
+    config.plugins.push(new LodashModuleReplacementPlugin({
+        shorthands: true, // Iteratee is not a function
+        flattening: true // Cannot read property 'length' of null
+    }))
     config.plugins.push(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /de$/)) // Only keep "de.js" and default moment.js locales
 }
 

@@ -28,7 +28,13 @@ export default class extends Template {
         const editCommand = new SedTemplate(`^ *${this.input} *= *`, `${this.input}=${this.value}`, this.file, {escapeFile: false}).toString(setup)
         const editMessage = shellEscape`${`${ansiGreen}Edited property ${ansiRed}${this.input}${ansiGreen} in ${this.file}`}`
 
-        return `${ifCommand}; then ${editCommand} && echo ${editMessage}; else ${appendCommand} && echo ${appendMessage}; fi`
+        return `${ifCommand}; then ${editCommand} && echo -e ${editMessage}; else ${appendCommand} && echo -e ${appendMessage}; fi`
+
+        /*
+         * Is there a long flag for "echo -e"?
+         * Something like --escape?
+         * https://ss64.com/bash/echo.html tells nothing
+         */
     }
 
 }

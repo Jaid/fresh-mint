@@ -1,7 +1,5 @@
 - build-essential
 
-- software-properties-common
-
 - package: git
   title: Git
 
