@@ -38,7 +38,7 @@ export default class RemovalSwitches extends React.Component {
                     checkedIcon=<span className={css.removeText}/>
                     uncheckedIcon={null}
                     width={100}
-                    onColor="#c37070"
+                    onColor="#d66464"
                     boxShadow="0 0 7px #00000066"
                     id={removal.id}
                     checked={this.props.value.includes(removal.id)}
