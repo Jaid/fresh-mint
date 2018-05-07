@@ -4,7 +4,38 @@ import lodash from "lodash"
 
 const orderedInstalls = lodash.sortBy(installs, [install => install.title.toLowerCase()])
 
-const swappinessValues = ["skip", 0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 96, 97, 98, 99, 100]
+const swappinessValues = [
+    "skip",
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "10",
+    "15",
+    "20",
+    "25",
+    "30",
+    "35",
+    "40",
+    "45",
+    "50",
+    "55",
+    "60",
+    "65",
+    "70",
+    "75",
+    "80",
+    "85",
+    "90",
+    "95",
+    "96",
+    "97",
+    "98",
+    "99",
+    "100"
+]
 const swapComments = {
     skip: "No changes",
     0: "0% (Do not swap)",
@@ -24,6 +55,12 @@ const schema = {
             default: "long",
             enum: ["long", "short", "minified"],
             enumNames: ["Descriptive", "Compact (minify arguments)", "Compressed (minify code)"]
+        },
+        downloadTool: {
+            type: "string",
+            default: "curl",
+            enum: ["curl", "wget"],
+            enumNames: ["cURL", "Wget"]
         },
         colors: {
             type: "boolean",
