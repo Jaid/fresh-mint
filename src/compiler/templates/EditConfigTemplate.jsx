@@ -23,17 +23,17 @@ export default class extends Template {
         const ansiGreen = setup.colors ? "\\033[1;32m" : ""
 
         const appendCommand = new AppendToFileTemplate(`\\n${this.input}=${this.value}`, file, {escapeFile: false}).toString(setup)
-        const appendMessage = shellEscape`${`${ansiGreen}Added property ${ansiRed}${this.input}${ansiGreen} to ${this.file}`}`
+        const appendMessage = shellEscape`${`${ansiGreen}Added property ${ansiRed}${this.input} ${ansiGreen}with value ${ansiRed}${this.value} ${ansiGreen}to ${this.file}`}`
 
         const editCommand = new SedTemplate(`^ *${this.input} *= *`, `${this.input}=${this.value}`, this.file, {escapeFile: false}).toString(setup)
-        const editMessage = shellEscape`${`${ansiGreen}Edited property ${ansiRed}${this.input}${ansiGreen} in ${this.file}`}`
+        const editMessage = shellEscape`${`${ansiGreen}Set property ${ansiRed}${this.input} ${ansiGreen}to ${ansiRed}${this.value} ${ansiGreen}in ${this.file}`}`
 
         return `${ifCommand}; then ${editCommand} && echo -e ${editMessage}; else ${appendCommand} && echo -e ${appendMessage}; fi`
 
         /*
          * Is there a long flag for "echo -e"?
          * Something like --escape?
-         * https://ss64.com/bash/echo.html tells nothing
+         * https://ss64.com/bash/echo.html tells nothing about it
          */
     }
 
