@@ -41,7 +41,7 @@ const swapComments = {
     skip: "No changes",
     0: "0% (Do not swap)",
     1: "1% (Swap only if really necessary)",
-    5: "5% (Recommended for RAM monsters)",
+    5: "5% (Recommended for large RAM)",
     10: "10% (Recommended for good PCs)",
     60: "60% (Linux Mint default)",
     100: "100% (Swap aggressively)"
@@ -85,7 +85,7 @@ const schema = {
         },
         colors: {
             type: "boolean",
-            title: "Colored terminal log"
+            title: "Colored terminal output"
         },
         aptUpgrade: {
             type: "boolean",

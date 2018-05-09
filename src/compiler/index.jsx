@@ -56,6 +56,7 @@ export default setup => {
          */
 
         const script = new BashScript({
+            sysConfig: {title: "Edit system configuration"},
             disablePasswordPrompt: {title: "Disable password prompt for sudo"},
             aptUpdate: {
                 title: "Update caches",
@@ -134,11 +135,13 @@ export default setup => {
             script.addCode(new AppendToFileTemplate("\"$USER ALL=NOPASSWD: ALL\"", "\"/etc/sudoers.d/$USER\"", {
                 escapeFile: false,
                 escapeContent: false
-            }).toString(setup), "disablePasswordPrompt")
+            })
+                .ifFileNotExists("/etc/sudoers.d/$USER", {escapeFile: false})
+                .toString(setup), "disablePasswordPrompt")
         }
 
         if (setup.swappiness !== "skip") {
-            script.addCode(new EditConfigTemplate("vm.swappiness", setup.swappiness, "/etc/sysctl.conf", {sudo: true}).toString(setup))
+            script.addCode(new EditConfigTemplate("vm.swappiness", setup.swappiness, "/etc/sysctl.conf", {sudo: true}).toString(setup), "sysConfig")
         }
 
         /*
