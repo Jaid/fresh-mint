@@ -19,7 +19,7 @@ const config = {
     },
     output: {
         path: path.join(__dirname, "build"),
-        filename: "[chunkhash].js"
+        filename: isDevelopment ? "[name].dev.js" : "[chunkhash:8].js"
     },
     module: {
         rules: [
@@ -100,8 +100,25 @@ const config = {
                 use: "yml-loader"
             },
             {
-                test: /\.(jpg|png|gif|svg|ttf|woff|woff2|eot)$/, // eslint-disable-line optimize-regex/optimize-regex
-                use: "url-loader?limit=5000"
+                test: /\.(ttf|woff|woff2|eot)$/, // eslint-disable-line optimize-regex/optimize-regex
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 4096
+                    }
+                }
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)$/,
+                use: isDevelopment ? "file-loader" : [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            limit: 4000,
+                            name: "images/[hash:base62:6].[ext]"
+                        }
+                    }, "image-webpack-loader"
+                ]
             },
             {
                 test: /\.html$/,
