@@ -6,11 +6,6 @@
 /package-lock.json # Removing because we use yarn.lock
 /yarn-error.log
 
-# Build folder
+# Generated or temporary content
 /build/
-
-# Webpack
-/webpackStats.json
-
-# Jest
-/coverage/
+/cache/

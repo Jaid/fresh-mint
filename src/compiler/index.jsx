@@ -100,8 +100,7 @@ export default setup => {
             script.addCode(new AppendToFileTemplate(setup, "\"$USER ALL=NOPASSWD: ALL\"", sudoersFile, {
                 escapeFile: false,
                 escapeContent: false
-            })
-                .ifFileNotExists(sudoersFile, {escapeFile: false}), "disablePasswordPrompt")
+            }).ifFileNotExists(sudoersFile, {escapeFile: false}), "disablePasswordPrompt")
         }
 
         if (setup.swappiness !== "skip") {

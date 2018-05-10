@@ -1,6 +1,7 @@
 import path from "path"
-import LodashModuleReplacementPlugin from "lodash-webpack-plugin"
-import HtmlWebpackPlugin from "html-webpack-plugin"
+import LodashPlugin from "lodash-webpack-plugin"
+import HtmlPlugin from "html-webpack-plugin"
+import WebappPlugin from "webapp-webpack-plugin"
 import webpack from "webpack"
 import appDescription from "./app"
 
@@ -11,6 +12,7 @@ const config = {
     resolve: {
         extensions: [".js", ".jsx"],
         alias: {
+            config: path.resolve(__dirname),
             components: path.resolve(__dirname, "..", "src", "components"),
             data: path.resolve(__dirname, "..", "src", "data")
         }
@@ -109,7 +111,7 @@ const config = {
     },
     plugins: [
         new webpack.EnvironmentPlugin(["NODE_ENV"]),
-        new HtmlWebpackPlugin({
+        new HtmlPlugin({
             appDescription,
             template: `!!ejs-compiled-loader!${path.resolve(__dirname, "html.ejs")}`,
             minify: isDevelopment ? false : {
@@ -125,6 +127,33 @@ const config = {
                 sortClassName: true,
                 useShortDoctype: true
             }
+        }),
+        new WebappPlugin({
+            logo: path.resolve(__dirname, "icon.png"),
+            prefix: "icons/",
+            cache: "cache/icons",
+            inject: true,
+            emitStats: false,
+            favicons: {
+                appName: appDescription.title,
+                appDescription: appDescription.description,
+                developerName: appDescription.authorName,
+                developerURL: appDescription.authorUrl,
+                version: appDescription.version,
+                background: "#283c31",
+                theme_color: "#adffb3",
+                orientation: "portrait",
+                icons: {
+                    android: true,
+                    appleIcon: {offset: 10},
+                    appleStartup: true,
+                    coast: {offset: 10},
+                    favicons: true,
+                    firefox: {offset: 15},
+                    windows: true,
+                    yandex: true
+                }
+            }
         })
     ],
     performance: {
@@ -134,7 +163,7 @@ const config = {
 }
 
 if (!isDevelopment) {
-    config.plugins.push(new LodashModuleReplacementPlugin({
+    config.plugins.push(new LodashPlugin({
         shorthands: true, // Iteratee is not a function
         flattening: true // Cannot read property 'length' of null
     }))

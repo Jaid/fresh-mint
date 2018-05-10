@@ -8,6 +8,7 @@ import css from "./style.postcss"
 import SetupForm from "components/SetupForm"
 import compileBash from "../../compiler"
 import defaultSetup from "data/defaultSetup.yml"
+import icon from "config/icon.png"
 
 class App extends React.Component {
 
@@ -22,7 +23,10 @@ class App extends React.Component {
 
     render() {
         return <div className={css.content}>
-            <SetupForm className={css.form} onChange={this.onFormChange} formData={this.state.formData}/>
+            <div className={css.controls}>
+                <img className={css.icon} src={icon}/><span className={css.title}>Fresh Mint</span>
+                <SetupForm className={css.form} onChange={this.onFormChange} formData={this.state.formData}/>
+            </div>
             <BareHighlight highlightjs={highlight} languages={["bash"]} className={css.code}>{compileBash(this.state.formData)}</BareHighlight>
         </div>
     }
