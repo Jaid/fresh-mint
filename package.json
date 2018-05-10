@@ -60,6 +60,7 @@
         "prop-types": "^15.6.1",
         "punycode": "^2.1.0",
         "react-hot-loader": "^4.1.2",
+        "robotstxt-webpack-plugin": "^4.0.1",
         "sass-loader": "^7.0.1",
         "style-loader": "^0.21.0",
         "surge": "^0.20.1",

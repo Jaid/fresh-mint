@@ -2,6 +2,7 @@ import path from "path"
 import LodashPlugin from "lodash-webpack-plugin"
 import HtmlPlugin from "html-webpack-plugin"
 import WebappPlugin from "webapp-webpack-plugin"
+import RobotsTxtPlugin from "robotstxt-webpack-plugin"
 import webpack from "webpack"
 import appDescription from "./app"
 
@@ -186,12 +187,10 @@ if (!isDevelopment) {
     }))
     config.plugins.push(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /de$/)) // Only keep "de.js" and default moment.js locales
     config.plugins.push(new webpack.BannerPlugin({
-        banner:
-        `${appDescription.title} v${appDescription.version}
-        Made by ${appDescription.authorName} - ${appDescription.authorUrl}
-        Build timestamp: ${Number(new Date)}`,
+        banner: `${appDescription.title} v${appDescription.version}\nPrecisely crafted by Jaid in Germany - ${appDescription.authorUrl}\nBuild timestamp: ${Number(new Date)}`,
         entryOnly: true
     }))
+    config.plugins.push(new RobotsTxtPlugin)
 }
 
 if (isDevelopment) {
