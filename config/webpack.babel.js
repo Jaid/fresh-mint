@@ -19,7 +19,7 @@ const config = {
     },
     output: {
         path: path.join(__dirname, "build"),
-        filename: "[name].js"
+        filename: "[chunkhash].js"
     },
     module: {
         rules: [
@@ -110,7 +110,7 @@ const config = {
         ]
     },
     plugins: [
-        new webpack.EnvironmentPlugin(["NODE_ENV"]),
+        new webpack.EnvironmentPlugin,
         new HtmlPlugin({
             appDescription,
             template: `!!ejs-compiled-loader!${path.resolve(__dirname, "html.ejs")}`,
@@ -168,6 +168,13 @@ if (!isDevelopment) {
         flattening: true // Cannot read property 'length' of null
     }))
     config.plugins.push(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /de$/)) // Only keep "de.js" and default moment.js locales
+    config.plugins.push(new webpack.BannerPlugin({
+        banner:
+        `${appDescription.title} v${appDescription.version}
+        Made by ${appDescription.authorName} - ${appDescription.authorUrl}
+        Build timestamp: ${Number(new Date)}`,
+        entryOnly: true
+    }))
 }
 
 if (isDevelopment) {
