@@ -2,17 +2,18 @@ import shellEscape from "../lib/shellEscape"
 
 export default class {
 
-    constructor(input) {
+    constructor(setup, input) {
+        this.setup = setup
         this.input = input
+        this.processors = []
     }
 
     if = condition => {
-        this.before = `[ ${condition} ] && `
+        this.processors.push(code => `if [ ${condition} ]; then ${code}; fi`)
+        return this
     }
 
-    ifNot = condition => {
-        this.before = `[ ${condition} ] || `
-    }
+    ifNot = condition => this.if(`! ${condition}`)
 
     ifFileExists = (file, options = {}) => {
         options = {
@@ -32,30 +33,16 @@ export default class {
         return this
     }
 
-    getCompilerByFormat = (format = "long") => {
-        if (format === "long") {
-            return this.compileLong
-        }
-
-        if (format === "short") {
-            return this.compileShort
-        }
-
-        return this.compileLong
+    comment = comment => {
+        this.processors.push(code => `${code} # ${comment}`)
+        return this
     }
 
-    toString = (setup, comment) => {
-        let command = this.compile(setup)
-        if (this.before) {
-            command = `${this.before} ${command}`
-        }
+    toString = () => {
+        let command = this.compile(this.setup)
 
-        if (this.after) {
-            command = `${command} ${this.after}`
-        }
-
-        if (comment) {
-            command = `${command} # ${comment}`
+        for (const processor of this.processors) {
+            command = processor(command)
         }
 
         return command

@@ -3,11 +3,11 @@ import Template from "./Template"
 
 export default class extends Template {
 
-    compile =setup => {
-        if (setup.format === "long") {
-            return shellEscape`sudo apt add-repository --yes ${this.input.name}`
+    compile = () => {
+        if (this.setup.format === "long") {
+            return shellEscape`sudo apt add-repository --yes ${this.input}`
         } else {
-            return shellEscape`sudo apt add-repository -y ${this.input.name}`
+            return shellEscape`sudo apt add-repository -y ${this.input}`
         }
     }
 

@@ -3,11 +3,11 @@ import Template from "./Template"
 
 export default class extends Template {
 
-    constructor(input, tool) {
-        super(input)
+    constructor(setup, input, tool) {
+        super(setup, input)
         this.tool = tool
     }
 
-    compile = setup => download.toStream(setup, this.input, this.tool)
+    compile = () => download.toStream(this.setup, this.input, this.tool)
 
 }

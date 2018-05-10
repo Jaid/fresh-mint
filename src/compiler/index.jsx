@@ -6,7 +6,6 @@ import AptRemoveTemplate from "./templates/AptRemoveTemplate"
 import AptAddSourceTemplate from "./templates/AptAddSourceTemplate"
 import PpaTemplate from "./templates/PpaTemplate"
 import ExecuteFromWebTemplate from "./templates/ExecuteFromWebTemplate"
-import SedTemplate from "./templates/SedTemplate"
 import EditConfigTemplate from "./templates/EditConfigTemplate"
 import ReloadShellTemplate from "./templates/ReloadShellTemplate"
 import AppendToFileTemplate from "./templates/AppendToFileTemplate"
@@ -19,41 +18,6 @@ export default setup => {
         if (lodash.isEmpty(setup)) {
             return ""
         }
-
-        /*
-         * setup = {
-         * commands: [],
-         * aptUpgrade: true,
-         * disablePasswordPrompt: true,
-         * packages: [
-         * "steam",
-         * "build-essential",
-         * "zsh",
-         * {
-         * name: "atom",
-         * ppa: "ppa:webupd8team/atom"
-         * }
-         * ],
-         * ppas: [],
-         * debs: [
-         * {
-         * url: "https://discordapp.com/api/download?platform=linux&format=deb",
-         * fileName: "discord.deb"
-         * }
-         * ],
-         * aptKeys: [],
-         * aptSources: [
-         * {
-         * url: "http://dl.google.com/linux/chrome/deb/",
-         * fileName: "google-chrome.list"
-         * }
-         * ],
-         * npmClient: "yarn",
-         * shell: "zsh",
-         * pythonWebScripts: [],
-         * format: "short"
-         * }
-         */
 
         const script = new BashScript({
             sysConfig: {title: "Edit system configuration"},
@@ -75,7 +39,7 @@ export default setup => {
         const checkedRemovals = removals.filter(removal => setup.removals.includes(removal.id))
 
         for (const removal of checkedRemovals) {
-            script.addCode(new AptRemoveTemplate(removal).toString(setup), "aptRemove")
+            script.addCode(new AptRemoveTemplate(setup, removal).toString(setup), "aptRemove")
         }
 
         if (!lodash.isEmpty(checkedInstalls)) {
@@ -102,24 +66,24 @@ export default setup => {
                 }
 
                 if (install.deb) {
-                    script.addCode(new DebTemplate(install.deb).toString(setup), "debInstall")
+                    script.addCode(new DebTemplate(setup, install.deb), "debInstall")
                 } else {
-                    script.addCode(new AptInstallTemplate(install).toString(setup), "aptInstall")
+                    script.addCode(new AptInstallTemplate(setup, install), "aptInstall")
                 }
             }
 
             for (const [ppa, usingInstalls] of Object.entries(ppas)) {
                 const list = and(lodash.sortBy(usingInstalls.map(usingInstall => usingInstall.title)), "and")
-                script.addCode(new PpaTemplate(ppa).toString(setup, `PPA used for ${list}`), "addPpas")
+                script.addCode(new PpaTemplate(setup, ppa).comment(`PPA used for ${list}`), "addPpas")
             }
 
             for (const usingInstalls of Object.values(sourceLists)) {
                 const list = and(lodash.sortBy(usingInstalls.map(usingInstall => usingInstall.title)), "and")
-                script.addCode(new AptAddSourceTemplate(usingInstalls[0].list).toString(setup, `Source list used for ${list}`), "addSources")
+                script.addCode(new AptAddSourceTemplate(setup, usingInstalls[0].list).comment(`Source list used for ${list}`), "addSources")
             }
 
             if (checkedInstalls.find(install => install.list)) { // Only run if at least 1 installed package adds a source list
-                script.addCode(new ExecuteFromWebTemplate("https://raw.githubusercontent.com/davidfoerster/apt-remove-duplicate-source-entries/master/apt-remove-duplicate-source-entries.py", `sudo python3 - ${setup.format === "long" ? "--yes" : "-y"}`).toString(setup, "Remove duplicate entries from source lists"), "clean")
+                script.addCode(new ExecuteFromWebTemplate(setup, "https://raw.githubusercontent.com/davidfoerster/apt-remove-duplicate-source-entries/master/apt-remove-duplicate-source-entries.py", `sudo python3 - ${setup.format === "long" ? "--yes" : "-y"}`).comment("Remove duplicate entries from source lists"), "clean")
             }
 
             if (checkedInstalls.find(install => !install.deb)) { // Only run if at least 1 non-deb package is installed
@@ -132,73 +96,18 @@ export default setup => {
         }
 
         if (setup.disablePasswordPrompt) {
-            script.addCode(new AppendToFileTemplate("\"$USER ALL=NOPASSWD: ALL\"", "\"/etc/sudoers.d/$USER\"", {
+            const sudoersFile = "/etc/sudoers.d/$USER"
+            script.addCode(new AppendToFileTemplate(setup, "\"$USER ALL=NOPASSWD: ALL\"", sudoersFile, {
                 escapeFile: false,
                 escapeContent: false
             })
-                .ifFileNotExists("/etc/sudoers.d/$USER", {escapeFile: false})
-                .toString(setup), "disablePasswordPrompt")
+                .ifFileNotExists(sudoersFile, {escapeFile: false}), "disablePasswordPrompt")
         }
 
         if (setup.swappiness !== "skip") {
-            script.addCode(new EditConfigTemplate("vm.swappiness", setup.swappiness, "/etc/sysctl.conf", {sudo: true}).toString(setup), "sysConfig")
+            script.addCode(new EditConfigTemplate(setup, "vm.swappiness", setup.swappiness, "/etc/sysctl.conf", {sudo: true}), "sysConfig")
         }
 
-        /*
-         * for (const command of setup.commands) {
-         * if (typeof command === "string") {
-         * script.add(command)
-         * } else {
-         * script.add(command.code, command.group)
-         * }
-         * }
-         *
-         * for (const pkg of setup.packages) {
-         * if (pkg.ppa && !setup.ppas.includes(pkg.ppa)) {
-         * setup.ppas.push(pkg.ppa)
-         * }
-         *
-         * script.addCode(new AptInstallTemplate(pkg).compile(setup), "apt-install")
-         * }
-         *
-         * for (const deb of setup.debs) {
-         * script.addCode(new DebTemplate(deb).compile(setup), "dpkg-install")
-         * }
-         *
-         * if (!lodash.isEmpty(setup.ppas)) {
-         * for (const ppa of setup.ppas) {
-         * script.addCode(new PpaTemplate(ppa).compile(setup), "add-ppas")
-         * }
-         *
-         * script.addCode(new PythonFromWebTemplate("https://raw.githubusercontent.com/davidfoerster/apt-remove-duplicate-source-entries/master/apt-remove-duplicate-source-entries.py").compile(setup), "clean-up")
-         * script.addCode("sudo apt update")
-         * }
-         *
-         * if (!lodash.isEmpty(setup.aptSources)) {
-         * script.addCode(new AptAddKeyTemplate("https://dl-ssl.google.com/linux/linux_signing_key.pub").compile(setup))
-         * for (const aptSource of setup.aptSources) {
-         * script.addCode(new AptAddSourceTemplate(aptSource).compile(setup))
-         * }
-         * }
-         *f
-         * if (setup.aptUpgrade) {
-         * script.addCode(new PythonFromWebTemplate("https://raw.githubusercontent.com/davidfoerster/apt-remove-duplicate-source-entries/master/apt-remove-duplicate-source-entries.py").compile(setup))
-         * }
-         *
-         * if (setup.disablePasswordPrompt) {
-         * script.addCode("sudo sh -c \"echo '${USER} ALL=NOPASSWD: ALL' > /etc/sudoers.d/${USER}\"")
-         * }
-         *
-         * if (setup.npmClient) {
-         * const code = []
-         * code.push(new BashFromWebTemplate("https://raw.githubusercontent.com/creationix/nvm/master/install.sh").compile(setup))
-         * code.push(". ~/.bashrc")
-         * code.push("nvm install node && nvm install latest npm")
-         * code.push(new BashFromWebTemplate("https://yarnpkg.com/install.sh").compile(setup))
-         * script.addCode(code, "install-npm")
-         * code.push(". ~/.bashrc")
-         * }
-         */
         return script.toString(setup.format === "minified")
     } catch (e) {
         console.error(e)

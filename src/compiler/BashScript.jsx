@@ -13,10 +13,10 @@ class CodeGroup {
     }
 
     addCode = code => {
-        if (typeof code === "string") {
-            this.code.push(code)
-        } else if (lodash.isArray(code)) {
+        if (lodash.isArray(code)) {
             this.code.push(...code)
+        } else {
+            this.code.push(code)
         }
     }
 

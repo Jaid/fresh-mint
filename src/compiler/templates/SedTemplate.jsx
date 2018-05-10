@@ -3,8 +3,8 @@ import Template from "./Template"
 
 export default class extends Template {
 
-    constructor(before, after, file, options) {
-        super(before)
+    constructor(setup, before, after, file, options) {
+        super(setup, before)
         this.after = after
         this.file = file
         this.options = {
@@ -14,11 +14,11 @@ export default class extends Template {
         }
     }
 
-    compile = setup => {
+    compile = () => {
         const file = this.escapeFile ? shellEscape`${this.file}` : this.file
         const pattern = `/${this.sedEscape(this.input)}/c\\${this.sedEscape(this.after)}`
         const tool = this.options.sudo ? "sudo sed" : "sed"
-        return `${tool} ${shellEscape`${setup.format === "long" ? "--in-place" : "-i"} ${pattern}`} ${file}`
+        return `${tool} ${shellEscape`${this.setup.format === "long" ? "--in-place" : "-i"} ${pattern}`} ${file}`
     }
 
     sedEscape = string => string.replace(/([&/\\])/g, "\\$1")
