@@ -6,7 +6,8 @@ cache:
 script:
   - yarn run build-prod && mv ./build/index.html ./build/200.html
 deploy:
-  provider: surge
-  project: ./build/
-  domain: fresh-mint.j4id.com
-  skip_cleanup: true
+  provider: pages
+  local-dir: ./build/
+  fqdn: fresh-mint.j4id.com
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
