@@ -13,6 +13,7 @@ const plugins = ["@babel/transform-runtime"]
 if (!isDevelopment) {
     plugins.push("lodash")
     presets.push("minify")
+    plugins.push("faster.js")
     config.comments = false
 }
 
