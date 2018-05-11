@@ -4,7 +4,7 @@ node_js:
 cache:
   yarn: true
 script:
-  - yarn run build-prod && mv ./build/index.html ./build/200.html
+  - yarn run build-prod && cp ./build/index.html ./build/404.html
 deploy:
   provider: pages
   local-dir: ./build/
