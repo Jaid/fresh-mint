@@ -3,6 +3,7 @@ import LodashPlugin from "lodash-webpack-plugin"
 import HtmlPlugin from "html-webpack-plugin"
 import WebappPlugin from "webapp-webpack-plugin"
 import RobotsTxtPlugin from "robotstxt-webpack-plugin"
+import CnamePlugin from "cname-webpack-plugin"
 import postcssOptions from "./postcss"
 import webpack from "webpack"
 import appDescription from "./app"
@@ -170,6 +171,7 @@ if (!isDevelopment) {
         entryOnly: true
     }))
     config.plugins.push(new RobotsTxtPlugin)
+    config.plugins.push(new CnamePlugin({domain: "j4id.com"}))
 }
 
 if (isDevelopment) {
