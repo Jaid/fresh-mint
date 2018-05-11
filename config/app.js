@@ -6,9 +6,10 @@ const version = packageData.version
 const embedTitle = title
 const authorName = packageData.author.name
 const authorUrl = packageData.author.url
-const siteUrl = "https://github.com/jaid/fresh-mint"
+const domain = `${packageData.name}.j4id.com`
+const siteUrl = `https://${domain}/`
 const description = packageData.description
-const thumbnail = `${siteUrl}/coast-228x228.png`
+const thumbnail = `${siteUrl}coast-228x228.png`
 const thumbnailSize = 228
 const language = "en"
 const locale = "en_US"
@@ -20,6 +21,7 @@ module.exports = {
     version,
     language,
     locale,
+    domain,
     siteUrl,
     authorName,
     authorUrl,
