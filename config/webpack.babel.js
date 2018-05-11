@@ -171,7 +171,7 @@ if (!isDevelopment) {
         entryOnly: true
     }))
     config.plugins.push(new RobotsTxtPlugin)
-    config.plugins.push(new CnamePlugin({domain: "fresh-mint.j4id.com"}))
+    config.plugins.push(new CnamePlugin({domain: "j4id.com"}))
 }
 
 if (isDevelopment) {
