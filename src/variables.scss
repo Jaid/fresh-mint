@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/functions";
+
+$body-bg: #2C2F33;
+$body-color: #DDD;
+
+$info: #348e64; // "Add" button color
+$danger: #d66464; // "Remove" button color
+$success: #70c370; // "Remove" button color
+
+$font-family-sans-serif: Ubuntu, Roboto, Arial, sans-serif;
+$font-family-monospace: 'Source Code Pro', 'Ubuntu Mono', 'Courier New', monospace;
+
+$form-group-margin-bottom: 1em;
+
+@import "~bootstrap/scss/variables";

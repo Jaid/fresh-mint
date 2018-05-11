@@ -1,0 +1,56 @@
+@import "../../variables.scss";
+
+.form {
+    padding: 1em;
+    :global(.btn-add)::after {
+        content: "Add";
+    }
+    :global(.array-item-move-up)::after {
+        content: "Move Up";
+    }
+    :global(.array-item-move-down)::after {
+        content: "Move Down";
+    }
+    :global(.array-item-remove)::after {
+        content: "Remove";
+    }
+    div:global(.checkbox) {
+        &:hover {
+            input {
+                box-shadow: 0 0 5px #66ff66;
+            }
+        }
+        input {
+            appearance: none;
+            width: 1.4em;
+            height: 1.4em;
+            position: relative;
+            margin-right: 0.5em;
+            background: $input-bg;
+            vertical-align: top;
+            outline: none;
+            box-shadow: 0 0 5px black;
+            &:checked {
+                background: $success;
+                &:before {
+                    font-size: 150%;
+                    bottom: 0.25em;
+                }
+            }
+            &:before {
+                content: '✓';
+                width: 100%;
+                height: 100%;
+                color: white;
+                position: absolute;
+                font-size: 0%;
+                transition: font-size 0.2s;
+                text-align: center;
+                text-shadow: 0 0 4px black;
+            }
+        }
+        span {
+            user-select: none;
+        }
+    }
+}

@@ -74,7 +74,9 @@ const config = {
                         loader: "css-loader",
                         options: {
                             sourceMap: isDevelopment,
-                            importLoaders: 2
+                            importLoaders: 2,
+                            modules: true, // CSS Modules https://github.com/css-modules/css-modules,
+                            localIdentName: isDevelopment ? "[name]_[local]_[hash:base64:4]" : undefined
                         }
                     },
                     {
@@ -187,7 +189,7 @@ if (!isDevelopment) {
     }))
     config.plugins.push(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /de$/)) // Only keep "de.js" and default moment.js locales
     config.plugins.push(new webpack.BannerPlugin({
-        banner: `${appDescription.title} v${appDescription.version}\nPrecisely crafted by Jaid in Germany - ${appDescription.authorUrl}\nBuild timestamp: ${Number(new Date)}`,
+        banner: `${appDescription.title} v${appDescription.version}\nCrafted by Jaid in Germany - ${appDescription.authorUrl}\nBuild timestamp: ${Number(new Date)}`,
         entryOnly: true
     }))
     config.plugins.push(new RobotsTxtPlugin)

@@ -3,6 +3,9 @@
     @media only screen and (max-width: 768px) {
         display: block;
     }
+    @media print {
+        display: block;
+    }
     height: 100vh;
     > pre {
         flex: 1;
@@ -33,48 +36,9 @@
 }
 
 .controls {
-    overflow: auto;
-}
-
-.form {
-    padding: 1em;
-    div:global(.checkbox) {
-        &:hover {
-            input {
-                box-shadow: 0 0 5px #66ff66;
-            }
-        }
-        input {
-            appearance: none;
-            width: 1.4em;
-            height: 1.4em;
-            position: relative;
-            margin-right: 0.5em;
-            background: #DDD;
-            vertical-align: top;
-            outline: none;
-            box-shadow: 0 0 5px black;
-            &:checked {
-                background: #70c370;
-                &:before {
-                    font-size: 150%;
-                    bottom: 0.25em;
-                }
-            }
-            &:before {
-                content: '✓';
-                width: 100%;
-                height: 100%;
-                color: white;
-                position: absolute;
-                font-size: 0%;
-                transition: font-size 0.2s;
-                text-align: center;
-                text-shadow: 0 0 4px black;
-            }
-        }
-        span {
-            user-select: none;
-        }
+    @media print {
+        display: none;
     }
+    overflow: auto;
+    max-width: 20em;
 }

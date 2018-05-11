@@ -2,8 +2,6 @@ import React from "react"
 import BareHighlight from "react-fast-highlight/lib/BareHighlight"
 import highlight from "./highlight";
 import highlightCss from "highlight.js/styles/atom-one-dark.css" // eslint-disable-line no-unused-vars
-// import bootstrap from "bootstrap"
-import "./theme.scss"
 import css from "./style.postcss"
 import SetupForm from "components/SetupForm"
 import compileBash from "../../compiler"
@@ -25,7 +23,7 @@ class App extends React.Component {
         return <div className={css.content}>
             <div className={css.controls}>
                 <img className={css.icon} src={icon}/><span className={css.title}>Fresh Mint</span>
-                <SetupForm className={css.form} onChange={this.onFormChange} formData={this.state.formData}/>
+                <SetupForm onChange={this.onFormChange} formData={this.state.formData}/>
             </div>
             <BareHighlight highlightjs={highlight} languages={["bash"]} className={css.code}>{compileBash(this.state.formData)}</BareHighlight>
         </div>

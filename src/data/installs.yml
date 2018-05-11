@@ -96,7 +96,7 @@
   title: Spotify
 
 - package: obs-studio
-  title: Open Broadcaster Software
+  title: OBS Studio
   ppa: obsproject/obs-studio
 
 - package: lmms

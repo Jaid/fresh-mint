@@ -60,6 +60,12 @@ const schema = {
             },
             uniqueItems: true
         },
+        customInstalls: {
+            title: "Custom APT packages",
+            type: "array",
+            items: {type: "string"},
+            uniqueItems: true
+        },
         removals: {
             title: "Remove preinstalled packages",
             type: "array",
