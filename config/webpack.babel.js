@@ -3,10 +3,16 @@ import LodashPlugin from "lodash-webpack-plugin"
 import HtmlPlugin from "html-webpack-plugin"
 import WebappPlugin from "webapp-webpack-plugin"
 import RobotsTxtPlugin from "robotstxt-webpack-plugin"
+import postcssOptions from "./postcss"
 import webpack from "webpack"
 import appDescription from "./app"
 
 const isDevelopment = global.DEBUG === true ? true : process.env.NODE_ENV !== "production"
+
+const postcssLoader = {
+    loader: "postcss-loader",
+    options: postcssOptions
+}
 
 const config = {
     mode: isDevelopment ? "development" : "production",
@@ -30,85 +36,56 @@ const config = {
                 use: "babel-loader"
             },
             {
-                test: /\.postcss/, // eslint-disable-line optimize-regex/optimize-regex
-                use: [
-                    {
-                        loader: "style-loader",
-                        options: {
-                            hmr: isDevelopment
-                        }
-                    },
-                    {
-                        loader: "css-loader",
-                        options: {
-                            sourceMap: isDevelopment,
-                            importLoaders: 1,
-                            modules: true, // CSS Modules https://github.com/css-modules/css-modules,
-                            localIdentName: isDevelopment ? "[name]_[local]_[hash:base64:4]" : undefined
-                        }
-                    },
-                    {
-                        loader: "postcss-loader",
-                        options: {
-                            sourceMap: "inline",
-                            config: {
-                                path: path.resolve(__dirname, "postcss.config.js"),
-                                ctx: {
-                                    debug: isDevelopment
-                                }
-                            }
-                        }
+                test: /\.(css|postcss|scss)$/,
+                use: {
+                    loader: "style-loader",
+                    options: {
+                        hmr: isDevelopment,
+                        singleton: !isDevelopment
                     }
-                ]
+                }
             },
             {
-                test: /\.scss$/, // eslint-disable-line optimize-regex/optimize-regex
+                test: /\.css$/, // Plain .css
+                use: postcssLoader
+            },
+            {
+                test: /\.global\.scss$/, // scss without local css-modules
                 use: [
-                    {
-                        loader: "style-loader",
-                        options: {
-                            hmr: isDevelopment
-                        }
-                    },
                     {
                         loader: "css-loader",
                         options: {
-                            sourceMap: isDevelopment,
-                            importLoaders: 2,
-                            modules: true, // CSS Modules https://github.com/css-modules/css-modules,
-                            localIdentName: isDevelopment ? "[name]_[local]_[hash:base64:4]" : undefined
+                            sourceMap: isDevelopment
                         }
                     },
-                    {
-                        loader: "postcss-loader",
-                        options: {
-                            sourceMap: "inline",
-                            config: {
-                                path: path.resolve(__dirname, "postcss.config.js"),
-                                ctx: {
-                                    debug: isDevelopment
-                                }
-                            }
-                        }
-                    },
+                    postcssLoader,
                     "sass-loader"
                 ]
             },
             {
-                test: /\.css$/, // eslint-disable-line optimize-regex/optimize-regex
-                use: ["style-loader", "css-loader"]
+                test: /^((?!\.?global).)*scss$/, // scss with local css-modules https://github.com/css-modules/css-modules/pull/65#issuecomment-359871109
+                use: [
+                    {
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: isDevelopment,
+                            modules: true, // CSS Modules https://github.com/css-modules/css-modules,
+                            localIdentName: isDevelopment ? "[path][local]_[hash:base62:2]" : undefined
+                        }
+                    },
+                    postcssLoader,
+                    "sass-loader"
+                ]
             },
             {
                 test: /\.yml$/,
                 use: "yml-loader"
             },
             {
-                test: /\.(ttf|woff|woff2|eot)$/, // eslint-disable-line optimize-regex/optimize-regex
-                use: {
-                    loader: "url-loader",
-                    options: {
-                        limit: 4096
-                    }
+                test: /\.(ttf|woff|woff2|eot)$/,
+                loader: "url-loader",
+                options: {
+                    limit: 4000
                 }
             },
             {

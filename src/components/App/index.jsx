@@ -2,7 +2,7 @@ import React from "react"
 import BareHighlight from "react-fast-highlight/lib/BareHighlight"
 import highlight from "./highlight";
 import highlightCss from "highlight.js/styles/atom-one-dark.css" // eslint-disable-line no-unused-vars
-import css from "./style.postcss"
+import css from "./style.scss"
 import SetupForm from "components/SetupForm"
 import compileBash from "../../compiler"
 import defaultSetup from "data/defaultSetup.yml"

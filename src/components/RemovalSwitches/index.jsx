@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import classnames from "classnames"
 import Switch from "react-switch";
-import css from "./style.postcss"
+import css from "./style.scss"
 import removals from "data/removals"
 
 export default class RemovalSwitches extends React.Component {

@@ -3,16 +3,16 @@
 .form {
     padding: 1em;
     :global(.btn-add)::after {
-        content: "Add";
+        content: "+";
     }
     :global(.array-item-move-up)::after {
-        content: "Move Up";
+        content: "⬆";
     }
     :global(.array-item-move-down)::after {
-        content: "Move Down";
+        content: "⬇";
     }
     :global(.array-item-remove)::after {
-        content: "Remove";
+        content: "🗑";
     }
     div:global(.checkbox) {
         &:hover {

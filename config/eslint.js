@@ -192,7 +192,7 @@ const pluginPromiseRules = {
 }
 
 const regexRules = {
-    "optimize-regex/optimize-regex": WARN
+    "optimize-regex/optimize-regex": "OFF" // Waiting for fix: https://github.com/BrainMaestro/eslint-plugin-optimize-regex/pull/12
 }
 
 module.exports = {
