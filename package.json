@@ -1,7 +1,7 @@
 {
     "name": "fresh-mint",
     "version": "0.1.0",
-    "description": "Linux Mint setup helper",
+    "description": "Setup script generator optimized for Linux Mint",
     "license": "MIT",
     "author": {
         "name": "Jaid",
@@ -89,6 +89,7 @@
         "react-bootstrap-switch": "^15.5.3",
         "react-dom": "^16.3.2",
         "react-fast-highlight": "^2.2.0",
+        "react-ga": "^2.5.0",
         "react-jsonschema-form": "^1.0.3",
         "react-switch": "^2.3.2",
         "url": "^0.11.0"
