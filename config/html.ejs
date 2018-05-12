@@ -38,8 +38,8 @@
     <meta property="og:image" content="<%= app.openGraph.image || app.image %>" />
     <meta property="og:image:width" content="<%= app.openGraph.imageWidth || app.imageWidth %>" />
     <meta property="og:image:height" content="<%= app.openGraph.imageHeight || app.imageHeight %>" />
-    <meta property="og:image:alt" content="<%= app.openGraphFacebook.imageAlt || app.imageAlt || ((app.openGraph.title || app.title || app.id) + ' icon') %>" />
-    <meta property="og:updated_time" content="<%= app.openGraphFacebook.updatedTime || app.updatedTime %>" />
+    <meta property="og:image:alt" content="<%= app.imageAlt || ((app.openGraph.title || app.title || app.id) + ' icon') %>" />
+    <meta property="og:updated_time" content="<%=  app.updatedTime %>" />
     <% } %>
 
     <% if (app.twitterCard) { %>
