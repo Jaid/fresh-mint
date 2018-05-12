@@ -1,50 +1,59 @@
+<% const app = htmlWebpackPlugin.options.appDescription %>
+<% const timestamp = Number(new Date) %>
+
+<!--
+<%= app.title || app.id %> v<%= app.version %>
+Crafted in Germany by <%= app.authorName || "Jaid" %> - <%= app.authorUrl %>
+Build timestamp: <%= timestamp %>
+-->
+
 <!doctype html>
-<html lang="<%= htmlWebpackPlugin.options.appDescription.language %>">
+<html lang="<%= app.language %>">
 <head>
 
     <meta charset="utf-8">
 
-    <title><%= htmlWebpackPlugin.options.appDescription.title %></title>
+    <title><%= app.title || app.id %></title>
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="HandheldFriendly" content="true">
-    <meta name="application-name" content="<%= htmlWebpackPlugin.options.appDescription.title %>">
-    <meta name="description" content="<%= htmlWebpackPlugin.options.appDescription.description %>">
-    <meta name="author" content="<%= htmlWebpackPlugin.options.appDescription.authorName %>">
-    <link rel='publisher' href="<%= htmlWebpackPlugin.options.appDescription.authorUrl %>">
+    <meta name="application-name" content="<%= app.title || app.id %>">
+    <meta name="description" content="<%= app.description %>">
+    <meta name="author" content="<%= app.authorName %>">
+    <link rel='publisher' href="<%= app.authorUrl %>">
 
-    <% if (htmlWebpackPlugin.options.appDescription.appleMeta) { %>
+    <% if (app.appleMeta) { %>
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="<%= htmlWebpackPlugin.options.appDescription.appleMeta.statusBarStyle %>">
-    <meta name="format-detection" content="telephone=<%= htmlWebpackPlugin.options.appDescription.appleMeta.parsePhoneNumbers ? "yes" : "no" %>">
+    <meta name="apple-mobile-web-app-status-bar-style" content="<%= app.appleMeta.statusBarStyle %>">
+    <meta name="format-detection" content="telephone=<%= app.appleMeta.parsePhoneNumbers ? "yes" : "no" %>">
     <% } %>
 
-    <% if (htmlWebpackPlugin.options.appDescription.openGraph) { %>
+    <% if (app.openGraph) { %>
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.title %>" />
-    <meta property="og:url" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.url %>" />
-    <meta property="og:image" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.image %>" />
-    <meta property="og:image:width" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.imageWidth %>" />
-    <meta property="og:image:height" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.imageHeight %>" />
-    <meta property="og:locale" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.locale %>" />
-    <meta property="og:description" content="<%= htmlWebpackPlugin.options.appDescription.openGraph.description %>" />
+    <meta property="og:title" content="<%= app.openGraph.title || app.title || app.id %>" />
+    <meta property="og:url" content="<%= app.openGraph.url %>" />
+    <meta property="og:image" content="<%= app.openGraph.image || app.image %>" />
+    <meta property="og:image:width" content="<%= app.openGraph.imageWidth || app.imageWidth %>" />
+    <meta property="og:image:height" content="<%= app.openGraph.imageHeight || app.imageHeight %>" />
+    <meta property="og:locale" content="<%= app.openGraph.locale || app.locale %>" />
+    <meta property="og:description" content="<%= app.openGraph.description || app.description %>" />
     <% } %>
 
-    <% if (htmlWebpackPlugin.options.appDescription.openGraphFacebook) { %>
-    <meta property="og:updated_time" content="<%= htmlWebpackPlugin.options.appDescription.openGraphFacebook.updatedTime %>" />
+    <% if (app.openGraphFacebook) { %>
+    <meta property="og:updated_time" content="<%= app.openGraphFacebook.updatedTime || timestamp %>" />
     <% } %>
 
-    <% if (htmlWebpackPlugin.options.appDescription.twitterCard) { %>
+    <% if (app.twitterCard) { %>
     <meta property="twitter:card" content="summary" />
-    <meta property="twitter:site" content="<%= htmlWebpackPlugin.options.appDescription.twitterCard.businessProfileHandle %>" />
-    <meta property="twitter:creator" content="<%= htmlWebpackPlugin.options.appDescription.twitterCard.authorProfileHandle %>" />
-    <meta property="twitter:title" content="<%= htmlWebpackPlugin.options.appDescription.twitterCard.title %>" />
-    <meta property="twitter:description" content="<%= htmlWebpackPlugin.options.appDescription.twitterCard.description %>" />
-    <meta property="twitter:image" content="<%= htmlWebpackPlugin.options.appDescription.twitterCard.image %>" />
+    <meta property="twitter:site" content="<%= app.twitterCard.businessProfileHandle || app.twitterCard.handle %>" />
+    <meta property="twitter:creator" content="<%= app.twitterCard.authorProfileHandle || app.twitterCard.handle %>" />
+    <meta property="twitter:title" content="<%= app.twitterCard.title || app.title || app.id %>" />
+    <meta property="twitter:description" content="<%= app.twitterCard.description || app.description %>" />
+    <meta property="twitter:image" content="<%= app.twitterCard.image || app.image %>" />
     <% } %>
 
-    <% if (htmlWebpackPlugin.options.appDescription.googleFonts) { htmlWebpackPlugin.options.appDescription.googleFonts.forEach(function(font) { %>
+    <% if (app.googleFonts) { app.googleFonts.forEach(function(font) { %>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=<%= font %>" lazyload>
     <% }) } %>
 
@@ -52,6 +61,9 @@
 
 <body>
 <div id='react'></div>
+<% if (app.noScriptMessage) { %>
+    <noscript><pre><%= app.noScriptMessage %></pre></noscript>
+<% } %>
 </body>
 
 </html>

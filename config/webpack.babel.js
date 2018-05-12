@@ -115,7 +115,6 @@ const config = {
                 decodeEntities: true,
                 minifyCSS: true,
                 minifyJS: true,
-                removeComments: true,
                 removeRedundantAttributes: true,
                 sortAttributes: true,
                 sortClassName: true,
@@ -163,7 +162,7 @@ if (!isDevelopment) {
     }))
     config.plugins.push(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /de$/)) // Only keep "de.js" and default moment.js locales
     config.plugins.push(new webpack.BannerPlugin({
-        banner: `${appDescription.title} v${appDescription.version}\nCrafted in Germany by Jaid - ${appDescription.authorUrl}\nBuild timestamp: ${Number(new Date)}`,
+        banner: `${appDescription.title} v${appDescription.version}\nCrafted in Germany by ${appDescription.authorName} - ${appDescription.authorUrl}\nBuild timestamp: ${Number(new Date)}`,
         entryOnly: true
     }))
     config.plugins.push(new RobotsTxtPlugin)

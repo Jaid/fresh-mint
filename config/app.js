@@ -2,53 +2,38 @@ const fs = require("fs")
 const packageData = JSON.parse(fs.readFileSync("package.json", "utf8"))
 
 const title = "Fresh Mint"
-const domain = `${packageData.name}.j4id.com`
 const language = "en"
 const locale = "en_US"
 const twitterHandle = "jaidchen"
-
-const siteUrl = `https://${domain}/`
-const thumbnailSize = 228
-const thumbnail = `${siteUrl}coast-228x228.png`
-const description = packageData.description
-const version = packageData.version
-const authorName = packageData.author.name
-const authorUrl = packageData.author.url
 const googleAnalyticsTrackingId = null
+
+const domain = `${packageData.name}.j4id.com`
+const siteUrl = `https://${domain}/`
 
 module.exports = {
     title,
-    version,
     language,
     locale,
     domain,
-    siteUrl,
-    authorName,
-    authorUrl,
-    description,
+    image: `${siteUrl}coast-228x228.png`,
+    imageWidth: 228,
+    imageHeight: 228,
     id: packageData.name,
+    version: packageData.version,
+    authorName: packageData.author.name,
+    authorUrl: packageData.author.url,
+    description: packageData.description,
+    noScriptMessage: "Would... would you mind giving me permission to execute one of my best scripts for you, senpai?\nwww.enable-javascript.com",
     appleMeta: { // https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
         statusBarStyle: "black",
         parsePhoneNumbers: false
     },
     openGraph: { // http://ogp.me/
-        description,
-        locale,
-        title,
-        url: siteUrl,
-        image: thumbnail,
-        imageWidth: thumbnailSize,
-        imageHeight: thumbnailSize
+        url: siteUrl
     },
-    openGraphFacebook: { // https://developers.facebook.com/docs/sharing/opengraph/object-properties
-        updatedTime: Number(new Date)
-    },
+    openGraphFacebook: true,
     twitterCard: { // https://dev.twitter.com/cards/markup
-        description,
-        title,
-        authorProfileHandle: twitterHandle,
-        businessProfileHandle: twitterHandle,
-        image: thumbnail
+        handle: twitterHandle
     },
     googleFonts: [
         "Ubuntu:400,700&subset=latin-ext",
