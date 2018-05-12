@@ -24,7 +24,7 @@ module.exports = {
     authorName: packageData.author.name,
     authorUrl: packageData.author.url,
     description: packageData.description,
-    banner: `${title} v${packageData.version}\nCrafted in Germany by ${packageData.author.name} - ${packageData.author.url}\nCompiled on ${moment().format("MMM YYYY")} (${Number(new Date)})`,
+    banner: `${title} v${packageData.version}\nCrafted in Germany by ${packageData.author.name} - ${packageData.author.url}\nCompiled on ${moment().format("MMM YYYY")} (${Math.ceil(Number(new Date) / 1000)})`,
     noScriptMessage: "Would... would you mind giving me permission to execute one of my best scripts for you, senpai?\nwww.enable-javascript.com",
     appleMeta: { // https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
         statusBarStyle: "black",

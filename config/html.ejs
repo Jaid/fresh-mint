@@ -40,7 +40,7 @@
     <% } %>
 
     <% if (app.openGraphFacebook) { %>
-    <meta property="og:updated_time" content="<%= app.openGraphFacebook.updatedTime || Number(new Date) %>" />
+    <meta property="og:updated_time" content="<%= app.openGraphFacebook.updatedTime || Math.ceil(Number(new Date) / 1000) %>" />
     <% } %>
 
     <% if (app.twitterCard) { %>
