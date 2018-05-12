@@ -1,11 +1,10 @@
 <% const app = htmlWebpackPlugin.options.appDescription %>
-<% const timestamp = Number(new Date) %>
 
+<% if (app.banner) { %>
 <!--
-<%= app.title || app.id %> v<%= app.version %>
-Crafted in Germany by <%= app.authorName || "Jaid" %> - <%= app.authorUrl %>
-Build timestamp: <%= timestamp %>
+<%= app.banner %>
 -->
+<% } %>
 
 <!doctype html>
 <html lang="<%= app.language %>">
@@ -41,7 +40,7 @@ Build timestamp: <%= timestamp %>
     <% } %>
 
     <% if (app.openGraphFacebook) { %>
-    <meta property="og:updated_time" content="<%= app.openGraphFacebook.updatedTime || timestamp %>" />
+    <meta property="og:updated_time" content="<%= app.openGraphFacebook.updatedTime || Number(new Date) %>" />
     <% } %>
 
     <% if (app.twitterCard) { %>

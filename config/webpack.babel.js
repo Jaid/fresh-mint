@@ -10,6 +10,7 @@ import appDescription from "./app"
 
 const isDevelopment = global.DEBUG === true ? true : process.env.NODE_ENV !== "production"
 
+
 const postcssLoader = {
     loader: "postcss-loader",
     options: postcssOptions
@@ -162,7 +163,7 @@ if (!isDevelopment) {
     }))
     config.plugins.push(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /de$/)) // Only keep "de.js" and default moment.js locales
     config.plugins.push(new webpack.BannerPlugin({
-        banner: `${appDescription.title} v${appDescription.version}\nCrafted in Germany by ${appDescription.authorName} - ${appDescription.authorUrl}\nBuild timestamp: ${Number(new Date)}`,
+        banner: appDescription.banner,
         entryOnly: true
     }))
     config.plugins.push(new RobotsTxtPlugin)

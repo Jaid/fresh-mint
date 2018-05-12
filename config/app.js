@@ -1,4 +1,5 @@
 const fs = require("fs")
+const moment = require("moment")
 const packageData = JSON.parse(fs.readFileSync("package.json", "utf8"))
 
 const title = "Fresh Mint"
@@ -23,6 +24,7 @@ module.exports = {
     authorName: packageData.author.name,
     authorUrl: packageData.author.url,
     description: packageData.description,
+    banner: `${title} v${packageData.version}\nCrafted in Germany by ${packageData.author.name} - ${packageData.author.url}\nCompiled on ${moment().format("MMM YYYY")}`,
     noScriptMessage: "Would... would you mind giving me permission to execute one of my best scripts for you, senpai?\nwww.enable-javascript.com",
     appleMeta: { // https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
         statusBarStyle: "black",
