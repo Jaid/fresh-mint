@@ -45,7 +45,7 @@
     <% } %>
 
     <% if (htmlWebpackPlugin.options.appDescription.googleFonts) { htmlWebpackPlugin.options.appDescription.googleFonts.forEach(function(font) { %>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=<%= font %>">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=<%= font %>" lazyload>
     <% }) } %>
 
 </head>
