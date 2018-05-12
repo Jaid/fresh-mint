@@ -2,18 +2,18 @@ const fs = require("fs")
 const packageData = JSON.parse(fs.readFileSync("package.json", "utf8"))
 
 const title = "Fresh Mint"
-const version = packageData.version
-const embedTitle = title
-const authorName = packageData.author.name
-const authorUrl = packageData.author.url
 const domain = `${packageData.name}.j4id.com`
-const siteUrl = `https://${domain}/`
-const description = packageData.description
-const thumbnail = `${siteUrl}icons/coast-228x228.png`
-const thumbnailSize = 228
 const language = "en"
 const locale = "en_US"
 const twitterHandle = "jaidchen"
+
+const siteUrl = `https://${domain}/`
+const thumbnailSize = 228
+const thumbnail = `${siteUrl}coast-228x228.png`
+const description = packageData.description
+const version = packageData.version
+const authorName = packageData.author.name
+const authorUrl = packageData.author.url
 const googleAnalyticsTrackingId = null
 
 module.exports = {
@@ -34,7 +34,7 @@ module.exports = {
     openGraph: { // http://ogp.me/
         description,
         locale,
-        title: embedTitle,
+        title,
         url: siteUrl,
         image: thumbnail,
         imageWidth: thumbnailSize,
@@ -45,7 +45,7 @@ module.exports = {
     },
     twitterCard: { // https://dev.twitter.com/cards/markup
         description,
-        title: embedTitle,
+        title,
         authorProfileHandle: twitterHandle,
         businessProfileHandle: twitterHandle,
         image: thumbnail

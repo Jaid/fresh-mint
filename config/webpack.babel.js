@@ -96,14 +96,10 @@ const config = {
                         loader: "url-loader",
                         options: {
                             limit: 4000,
-                            name: "images/[hash:base62:6].[ext]"
+                            name: "[hash:base62:6].[ext]"
                         }
                     }, "image-webpack-loader"
                 ]
-            },
-            {
-                test: /\.html$/,
-                use: "html-loader"
             }
         ]
     },
@@ -128,7 +124,7 @@ const config = {
         }),
         new WebappPlugin({
             logo: path.resolve(__dirname, "icon.png"),
-            prefix: "icons/",
+            prefix: "/",
             cache: "cache/icons",
             inject: true,
             emitStats: false,

@@ -10,15 +10,13 @@ const presets = [
 
 const plugins = ["@babel/transform-runtime"]
 
-if (!isDevelopment) {
-    plugins.push("lodash")
-    presets.push("minify")
-    config.comments = false
-}
-
 if (isDevelopment) {
     plugins.push("react-hot-loader/babel")
     // config.sourceMaps = "inline"
+} else {
+    plugins.push("lodash")
+    presets.push("minify")
+    config.comments = false
 }
 
 Object.assign(config, {
