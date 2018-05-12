@@ -33,7 +33,6 @@ module.exports = {
     openGraph: { // http://ogp.me/
         url: siteUrl
     },
-    openGraphFacebook: true,
     twitterCard: { // https://dev.twitter.com/cards/markup
         handle: twitterHandle
     },

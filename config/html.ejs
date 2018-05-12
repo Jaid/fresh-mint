@@ -1,3 +1,5 @@
+<!doctype html>
+
 <% const app = htmlWebpackPlugin.options.appDescription %>
 
 <% if (app.banner) { %>
@@ -6,7 +8,6 @@
 -->
 <% } %>
 
-<!doctype html>
 <html lang="<%= app.language %>">
 <head>
 
@@ -37,10 +38,8 @@
     <meta property="og:image:height" content="<%= app.openGraph.imageHeight || app.imageHeight %>" />
     <meta property="og:locale" content="<%= app.openGraph.locale || app.locale %>" />
     <meta property="og:description" content="<%= app.openGraph.description || app.description %>" />
-    <% } %>
-
-    <% if (app.openGraphFacebook) { %>
     <meta property="og:updated_time" content="<%= app.openGraphFacebook.updatedTime || Math.ceil(Number(new Date) / 1000) %>" />
+    <meta property="og:image:alt" content="<%= app.openGraphFacebook.imageAlt || app.imageAlt || ((app.openGraph.title || app.title || app.icon) + ' icon') %>" />
     <% } %>
 
     <% if (app.twitterCard) { %>
