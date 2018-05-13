@@ -113,7 +113,12 @@ const schema = {
 
 const ui = {
     installs: {"ui:widget": "installs"},
-    customInstalls: {"ui:options": {orderable: false}},
+    customInstalls: {
+        "ui:options": {
+            orderable: false,
+            removable: false
+        }
+    },
     removals: {"ui:widget": "removals"}
 }
 

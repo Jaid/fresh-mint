@@ -1,12 +1,13 @@
 const fs = require("fs")
 const moment = require("moment")
+const crypto = require("crypto")
 const packageData = JSON.parse(fs.readFileSync("package.json", "utf8"))
 
 const title = "Fresh Mint"
 const language = "en"
 const locale = "en_US"
 const twitterHandle = "jaidchen"
-const googleAnalyticsTrackingId = null
+const googleAnalyticsTrackingId = "UA-51563406-5"
 
 const updatedTime = Math.ceil(Number(new Date) / 1000)
 const domain = `${packageData.name}.j4id.com`
@@ -22,6 +23,7 @@ module.exports = {
     imageWidth: 228,
     imageHeight: 228,
     id: packageData.name,
+    cryptId: crypto.createHash("md5").update(packageData.name).digest("hex").substring(0, 4),
     version: packageData.version,
     authorName: packageData.author.name,
     authorUrl: packageData.author.url,

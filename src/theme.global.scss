@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@import "./variables.global.scss";
 
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/root";
@@ -34,3 +34,13 @@
 //@import "~bootstrap/scss/carousel";
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/print";
+
+.form-group.field-boolean,
+.array-item-list .form-group.field-string {
+    margin-top: 0em;
+    margin-bottom: 0em;
+}
+
+fieldset.field-array-of-string .array-item {
+    margin-bottom: $form-group-margin-bottom;
+}

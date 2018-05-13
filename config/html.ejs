@@ -58,7 +58,7 @@
 </head>
 
 <body>
-<div id='react'></div>
+<div id="<%= app.cryptId || 'react' %>"></div>
 <% if (app.noScriptMessage) { %>
     <noscript><pre><%= app.noScriptMessage %></pre></noscript>
 <% } %>

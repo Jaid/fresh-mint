@@ -1,4 +1,5 @@
 import path from "path"
+import crypto from "crypto"
 import LodashPlugin from "lodash-webpack-plugin"
 import HtmlPlugin from "html-webpack-plugin"
 import WebappPlugin from "webapp-webpack-plugin"
@@ -105,7 +106,10 @@ const config = {
         ]
     },
     plugins: [
-        new webpack.EnvironmentPlugin,
+        new webpack.EnvironmentPlugin({
+            CRYPT_ID: appDescription.cryptId,
+            GOOGLE_ANALYTICS_TRACKING_ID: appDescription.googleAnalytics.trackingId
+        }),
         new HtmlPlugin({
             appDescription,
             template: `!!ejs-compiled-loader!${path.resolve(__dirname, "html.ejs")}`,
