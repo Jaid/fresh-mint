@@ -1,6 +1,11 @@
+import React from "react"
 import installs from "data/installs"
 import removals from "data/removals"
 import lodash from "lodash"
+
+import InstallSwitches from "components/InstallSwitches"
+import RemovalSwitches from "components/RemovalSwitches"
+import StringArray from "components/StringArray"
 
 const orderedInstalls = lodash.sortBy(installs, [install => install.title.toLowerCase()])
 const orderedRemovals = lodash.sortBy(removals, [removal => removal.title.toLowerCase()])
@@ -37,6 +42,7 @@ const swappinessValues = [
     "99",
     "100"
 ]
+
 const swapComments = {
     skip: "No changes",
     0: "0% (Do not swap)",
@@ -63,7 +69,10 @@ const schema = {
         customInstalls: {
             title: "Custom APT packages",
             type: "array",
-            items: {type: "string"},
+            items: {
+                type: "string",
+                enum: []
+            },
             uniqueItems: true
         },
         removals: {
@@ -112,30 +121,10 @@ const schema = {
 }
 
 const ui = {
-    installs: {"ui:widget": "installs"},
-    customInstalls: {
-        "ui:options": {
-            orderable: false,
-            removable: false
-        }
-    },
-    removals: {"ui:widget": "removals"}
+    installs: {"ui:widget": InstallSwitches},
+    customInstalls: {"ui:widget": props => <StringArray newPlaceholer="New package" {...props}/>},
+    removals: {"ui:widget": RemovalSwitches}
 }
-
-/*
- * for (let install of orderedInstalls) {
- * schema.properties.installs.properties[install.id] = {
- * type: "boolean",
- * title: install.title,
- * default: install.default
- * }
- *
- * ui.installs[install.id] = {
- * "ui:widget": "install",
- * "ui:options": {label: false}
- * }
- *}
- */
 
 export default {
     schema,

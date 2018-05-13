@@ -1,5 +1,4 @@
 import path from "path"
-import crypto from "crypto"
 import LodashPlugin from "lodash-webpack-plugin"
 import HtmlPlugin from "html-webpack-plugin"
 import WebappPlugin from "webapp-webpack-plugin"
@@ -10,7 +9,6 @@ import webpack from "webpack"
 import appDescription from "./app"
 
 const isDevelopment = global.DEBUG === true ? true : process.env.NODE_ENV !== "production"
-
 
 const postcssLoader = {
     loader: "postcss-loader",
@@ -142,14 +140,10 @@ const config = {
                 theme_color: "#adffb3",
                 orientation: "portrait",
                 icons: {
-                    android: true,
                     appleIcon: {offset: 10},
                     appleStartup: true,
                     coast: {offset: 10},
-                    favicons: true,
-                    firefox: {offset: 15},
-                    windows: true,
-                    yandex: true
+                    firefox: {offset: 15}
                 }
             }
         })
@@ -159,23 +153,20 @@ const config = {
         maxEntrypointSize: 3000000 // 3 MB
     }
 }
-
-if (!isDevelopment) {
+if (isDevelopment) {
+    config.devtool = "eval"
+} else {
     config.plugins.push(new LodashPlugin({
         shorthands: true, // Iteratee is not a function
         flattening: true // Cannot read property 'length' of null
-    }))
-    config.plugins.push(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /de$/)) // Only keep "de.js" and default moment.js locales
-    config.plugins.push(new webpack.BannerPlugin({
+    }),
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /de$/), // Only keep "de.js" and default moment.js locales
+    new webpack.BannerPlugin({
         banner: appDescription.banner,
         entryOnly: true
-    }))
-    config.plugins.push(new RobotsTxtPlugin)
-    config.plugins.push(new CnamePlugin({domain: appDescription.domain}))
-}
-
-if (isDevelopment) {
-    config.devtool = "eval"
+    }),
+    new RobotsTxtPlugin,
+    new CnamePlugin({domain: appDescription.domain}))
 }
 
 if (process.env.USE_WEBPACK_SERVE) {

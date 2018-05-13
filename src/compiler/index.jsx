@@ -91,6 +91,18 @@ export default setup => {
             }
         }
 
+        if (setup.customInstalls) {
+            for (const install of setup.customInstalls) {
+                if (install.trim()) {
+                    const installObject = {
+                        id: install,
+                        package: install
+                    }
+                    script.addCode(new AptInstallTemplate(setup, installObject), "aptInstall")
+                }
+            }
+        }
+
         if (setup.aptUpgrade) {
             script.addCode(`sudo apt full-upgrade ${setup.format === "long" ? "--yes" : "-y"}`, "aptUpgrade")
         }
