@@ -1,5 +1,6 @@
-const WARN = "warn"
-const ERROR = "error"
+const OFF = 0
+const WARN = 1
+const ERROR = 2
 
 const styleRules = {
     "new-cap": WARN,
@@ -192,7 +193,77 @@ const pluginPromiseRules = {
 }
 
 const regexRules = {
-    "optimize-regex/optimize-regex": "OFF" // Waiting for fix: https://github.com/BrainMaestro/eslint-plugin-optimize-regex/pull/12
+    "optimize-regex/optimize-regex": OFF // Waiting for fix: https://github.com/BrainMaestro/eslint-plugin-optimize-regex/pull/12
+}
+
+const reactRules = {
+    "react/button-has-type": WARN,
+    "react/default-props-match-prop-types": WARN,
+    "react/destructuring-assignment": [WARN, "never"],
+    "react/forbid-dom-props": [WARN, {forbid: ["style"]}],
+    "react/forbid-foreign-prop-types": WARN,
+    "react/no-access-state-in-setstate": WARN,
+    "react/no-children-prop": WARN,
+    "react/no-danger-with-children": ERROR,
+    "react/no-deprecated": WARN,
+    "react/no-did-mount-set-state": WARN,
+    "react/no-did-update-set-state": WARN,
+    "react/no-direct-mutation-state": ERROR,
+    "react/no-find-dom-node": WARN,
+    "react/no-is-mounted": WARN,
+    "react/no-redundant-should-component-update": WARN,
+    "react/no-render-return-value": WARN,
+    "react/no-typos": WARN,
+    "react/no-string-refs": WARN,
+    "react/no-this-in-sfc": WARN,
+    "react/no-unknown-property": WARN,
+    "react/no-unused-prop-types": WARN,
+    "react/no-will-update-set-state": WARN,
+    "react/prefer-es6-class": WARN,
+    "react/prop-types": WARN,
+    "react/react-in-jsx-scope": WARN,
+    "react/require-render-return": WARN,
+    "react/self-closing-comp": WARN,
+    "react/sort-comp": WARN,
+    "react/style-prop-object": WARN,
+    "react/void-dom-elements-no-children": WARN
+}
+
+const jsxRules = {
+    "react/jsx-boolean-value": [WARN, "never"],
+    "react/jsx-child-element-spacing": WARN,
+    "react/jsx-closing-tag-location": WARN,
+    "react/jsx-curly-spacing": WARN,
+    "react/jsx-equals-spacing": WARN,
+    "react/jsx-filename-extension": WARN,
+    "react/jsx-handler-names": WARN,
+    "react/jsx-indent": [WARN, 4],
+    "react/jsx-indent-props": [WARN, 4],
+    "react/jsx-key": WARN,
+    "react/jsx-max-props-per-line": [
+        WARN,
+        {
+            maximum: 1,
+            when: "multiline"
+        }
+    ],
+    "react/jsx-no-bind": WARN,
+    "react/jsx-no-duplicate-props": WARN,
+    "react/jsx-no-target-blank": ERROR, // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-target-blank.md
+    "react/jsx-no-undef": [WARN, {allowGlobals: true}],
+    "react/jsx-curly-brace-presence": WARN,
+    "react/jsx-pascal-case": WARN,
+    "react/jsx-tag-spacing": [
+        WARN,
+        {
+            closingSlash: "never",
+            beforeSelfClosing: "never",
+            afterOpening: "never",
+            beforeClosing: "never"
+        }
+    ],
+    "react/jsx-uses-react": ERROR,
+    "react/jsx-uses-vars": ERROR
 }
 
 module.exports = {
@@ -201,7 +272,12 @@ module.exports = {
         ecmaVersion: 8,
         sourceType: "module"
     },
-    extends: ["plugin:react/recommended"],
-    plugins: ["promise", "optimize-regex"],
-    rules: Object.assign({}, esRules, styleRules, pluginPromiseRules, regexRules)
+    plugins: ["promise", "optimize-regex", "react"],
+    rules: Object.assign({},
+        esRules,
+        styleRules,
+        pluginPromiseRules,
+        regexRules,
+        reactRules,
+        jsxRules)
 }
