@@ -127,7 +127,7 @@ const config = {
         new WebappPlugin({
             logo: path.resolve(__dirname, "icon.png"),
             prefix: "/",
-            cache: "cache/icons",
+            cache: "cache/webapp-webpack-plugin",
             inject: true,
             emitStats: false,
             favicons: {
