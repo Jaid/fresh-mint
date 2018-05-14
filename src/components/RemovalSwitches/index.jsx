@@ -8,16 +8,8 @@ import removals from "data/removals"
 export default class RemovalSwitches extends React.Component {
 
     static propTypes = {
-        className: PropTypes.string,
-        label: PropTypes.string,
-        autofocus: PropTypes.bool,
-        disabled: PropTypes.bool,
-        id: PropTypes.string.isRequired,
         schema: PropTypes.object.isRequired,
-        readonly: PropTypes.bool,
-        registry: PropTypes.object,
         onChange: PropTypes.func,
-        options: PropTypes.object,
         value: PropTypes.any.isRequired
     }
 

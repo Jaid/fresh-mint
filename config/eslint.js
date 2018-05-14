@@ -232,7 +232,6 @@ const reactRules = {
 const jsxRules = {
     "react/jsx-boolean-value": [WARN, "never"],
     "react/jsx-child-element-spacing": WARN,
-    "react/jsx-closing-tag-location": WARN,
     "react/jsx-curly-spacing": WARN,
     "react/jsx-equals-spacing": WARN,
     "react/jsx-filename-extension": WARN,
@@ -247,7 +246,6 @@ const jsxRules = {
             when: "multiline"
         }
     ],
-    "react/jsx-no-bind": WARN,
     "react/jsx-no-duplicate-props": WARN,
     "react/jsx-no-target-blank": ERROR, // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-target-blank.md
     "react/jsx-no-undef": [WARN, {allowGlobals: true}],

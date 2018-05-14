@@ -15,7 +15,7 @@ class App extends React.Component {
         this.state = {formData: defaultSetup}
     }
 
-    onFormChange = ({formData}) => {
+    handleFormChange = ({formData}) => {
         this.setState({formData})
     }
 
@@ -23,7 +23,7 @@ class App extends React.Component {
         return <div className={css.content}>
             <div className={css.controls}>
                 <img className={css.icon} src={icon}/><span className={css.title}>Fresh Mint</span>
-                <SetupForm onChange={this.onFormChange} formData={this.state.formData}/>
+                <SetupForm onChange={this.handleFormChange} formData={this.state.formData}/>
             </div>
             <BareHighlight highlightjs={highlight} languages={["bash"]} className={css.code}>{compileBash(this.state.formData)}</BareHighlight>
         </div>
