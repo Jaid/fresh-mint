@@ -9,4 +9,4 @@ if (process.env.NODE_ENV === "production" && process.env.GOOGLE_ANALYTICS_TRACKI
     googleAnalytics.pageview(window.location.pathname + window.location.search);
 }
 
-ReactDom.render(<App />, document.getElementById(process.env.CRYPT_ID))
+ReactDom.render(<App/>, document.getElementById(process.env.CRYPT_ID))
