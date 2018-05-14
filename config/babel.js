@@ -14,6 +14,7 @@ if (isDevelopment) {
     plugins.push("react-hot-loader/babel")
     // config.sourceMaps = "inline"
 } else {
+    plugins.push("transform-react-remove-prop-types")
     plugins.push("lodash")
     presets.push("minify")
     config.comments = false
