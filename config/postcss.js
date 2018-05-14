@@ -2,11 +2,7 @@ const isDevelopment = global.DEBUG === true ? true : process.env.NODE_ENV !== "p
 
 const plugins = []
 const addPlugin = (plugin, options) => {
-    if (options) {
-        plugins.push(require(plugin)(options))
-    } else {
-        plugins.push(require(plugin)())
-    }
+    plugins.push(require(plugin)(options))
 }
 
 addPlugin("postcss-nested") // Resolves nested blocks
@@ -38,7 +34,7 @@ if (!isDevelopment) {
     })
     addPlugin("postcss-ordered-values") // Sorts arguments of properties, border for example
     addPlugin("cssnano", { // Minifies output
-        reduceIdents: true // http://cssnano.co/guides/optimisations/
+        reduceIdents: true // http://cssnano.co/guides/optimisations
     })
 }
 
