@@ -22,7 +22,8 @@ const config = {
         alias: {
             config: path.resolve(__dirname),
             components: path.resolve(__dirname, "..", "src", "components"),
-            data: path.resolve(__dirname, "..", "src", "data")
+            data: path.resolve(__dirname, "..", "src", "data"),
+            lib: path.resolve(__dirname, "..", "src", "lib")
         }
     },
     output: {

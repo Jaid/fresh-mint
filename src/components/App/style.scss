@@ -1,3 +1,5 @@
+@import "../../variables.global.scss";
+
 .content {
     display: flex;
     @media only screen and (max-width: 768px) {
@@ -41,4 +43,12 @@
     }
     overflow: auto;
     max-width: 20em;
+}
+
+.toast {
+    font-family: $font-family-sans-serif !important;
+}
+
+.toastProgressBar {
+    background: $info !important;
 }

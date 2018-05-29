@@ -35,6 +35,50 @@
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/print";
 
+// HTML tags style
+
+button {
+    outline: none;
+    border-radius: 7px;
+    border: 1px solid #fff;
+    color: #fff;
+    padding-top: 0.35em;
+    padding-bottom: 0.35em;
+    padding-left: 0.85em;
+    padding-right: 0.85em;
+    outline: none;
+    user-select: none;
+    background: linear-gradient(to bottom, $primary 0%, darken(adjust-hue($primary, 30), 35) 100%);
+    cursor: pointer;
+    font-family: $font-family-sans-serif;
+    transition: background-color 0.2s;
+    &:active {
+        border-top-width: 0;
+        border-left-width: 0;
+        border-right-width: 2px;
+        border-bottom-width: 2px;
+        border-color: darken(adjust-hue($primary, 0), 40);
+    }
+    &:not([disabled]):hover {
+        background: linear-gradient(to bottom, darken(adjust-hue($primary, 30), 35) 0%, darken(adjust-hue($primary, 30), 20) 100%);
+        text-shadow: 0 0 5px #844900;
+    }
+    &[disabled] {
+        background: #525252;
+        color: #adadad;
+        border-color: #adadad;
+        cursor: not-allowed;
+    }
+    &:focus {
+        outline: none;
+    }
+    + button {
+        margin-left: 4px;
+    }
+}
+
+// react-jsonschema-form style
+
 .form-group.field-boolean,
 .array-item-list .form-group.field-string {
     margin-top: 0em;
